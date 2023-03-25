@@ -21,6 +21,9 @@
 
     <link rel="stylesheet" href="{{ url('css/bootstrap-datetimepicker.min.css') }}" />
 
+    <!-- カスタムCSS -->
+    <link rel="stylesheet" href="{{ url('css/my_css.css') }}" />
+
     {{-- datatablesを有効にするにはこの位置でないとjqueryを呼んでくれない --}}
     <script src="{{ url('js/jquery.min.js') }}"></script>
 

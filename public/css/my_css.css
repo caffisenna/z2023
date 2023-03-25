@@ -1,0 +1,5 @@
+/* もろもろ上書きするCSS */
+
+[class*=sidebar-dark-] {
+    background-color: #115740 !important;
+}
