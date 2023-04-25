@@ -15,7 +15,7 @@
 
 <body class="antialiased">
     <div style="background-color:#115740">
-        <p class="uk-text-default uk-text-center uk-margin-auto-vertical" style="color:#FFF">全国大会2024<br>デジタルパスのご案内
+        <p class="uk-text-default uk-text-center uk-margin-auto-vertical" style="color:#FFF">全国大会2023<br>デジタルパスのご案内
         </p>
     </div>
     <div class="uk-container uk-container-large">
