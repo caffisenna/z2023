@@ -66,14 +66,15 @@
     });
 </script>
 <div class="table-responsive">
-    <table class="uk-table uk-table-divider uk-table-hover" id="participants-table">
+    <table class="uk-table uk-table-divider uk-table-hover uk-table-small" id="participants-table">
         <thead>
             <tr>
-                <th>カテゴリ</th>
+                <th>県連</th>
                 <th>役務</th>
                 <th>氏名</th>
-                <th>座席</th>
-                <th>参加費</th>
+                <th>表彰式</th>
+                <th>交歓会</th>
+                <th>テーマ</th>
                 <th>操作</th>
             </tr>
         </thead>
@@ -81,73 +82,26 @@
             @foreach ($participants as $participant)
                 <tr>
                     <td>{{ $participant->pref }}</td>
+                    <td> {{ $participant->dan }}</td>
+                    <td><a href="{{ route('participants.show', [$participant->id]) }}">{{ $participant->name }}</a></td>
                     <td>
-                        @switch($participant->category)
-                            @case('県連代表(1)')
-                                <span class="uk-text-success">理事長</span>
-                            @break
-
-                            @case('県連代表(2)')
-                                <span class="uk-text-success">県コミッショナー</span>
-                            @break
-
-                            @case('県連代表(3)')
-                                <span class="uk-text-success">事務局長</span>
-                            @break
-
-                            @case('県連代表(4)')
-                                <span class="uk-text-success">引率指導者</span>
-                            @break
-
-                            @case('県連代表(5)')
-                                <span class="uk-text-success">VSスカウト</span>
-                            @break
-
-                            @case('県連代表(6)')
-                                <span class="uk-text-success">BSスカウト</span>
-                            @break
-
-                            @default
-                                任意参加者
-                        @endswitch
-                        @if (isset($participant->is_proxy) && $participant->is_proxy !== '')
-                            <br><span class="uk-text-small">(代理:{{ $participant->is_proxy }})</span>
-                        @endif
-                    </td>
-                    <td><a href="{{ route('participants.show', [$participant->id]) }}">{{ $participant->name }}</a>
-                        <span class="uk-text-warning">
-                            @if (isset($participant->vs))
-                                <br>VS:{{ $participant->vs->name }}
-                            @endif
-                            @if (isset($participant->bs))
-                                <br>BS:{{ $participant->bs->name }}
-                            @endif
-                        </span>
-                    </td>
-                    <td>
-                        @if (isset($participant->seat_number))
-                            式典:{{ $participant->seat_number }}
-                            @if (isset($participant->self_absent))
-                                <span class="uk-text-danger">(欠)</span>
-                            @endif
-                        @endif
-                        @if (isset($participant->reception_seat_number))
-                            <br>レセ:{{ $participant->reception_seat_number }}
-                            @if (isset($participant->reception_self_absent))
-                                <span class="uk-text-danger">(欠)</span>
-                            @endif
+                        @if ($participant->ceremony == '表彰式に参加する')
+                            参加
+                        @elseif($participant->ceremony == '同伴者と二人で参加する')
+                            参加(同伴者)
+                        @else
                         @endif
                     </td>
                     <td>
-                        @if (isset($participant->fee_checked_at))
-                            済み
+                        @if ($participant->reception == '参加する')
+                            参加
                         @endif
                     </td>
+                    <td>{{ $participant->theme_division }}</td>
                     <td>
                         {!! Form::open(['route' => ['participants.destroy', $participant->id], 'method' => 'delete']) !!}
                         <div class='btn-group'>
-                            <a href="{{ route('participants.edit', [$participant->id]) }}"
-                                class='btn btn-default btn-xs'>
+                            <a href="{{ route('participants.edit', [$participant->id]) }}" class='btn btn-default btn-xs'>
                                 <span uk-icon="file-edit"></span>
                             </a>
                             {!! Form::button('<span uk-icon="trash"></span>', [
