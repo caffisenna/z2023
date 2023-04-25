@@ -1,58 +1,74 @@
 <table class="uk-table uk-table-hover uk-table-striped">
     <tr>
-        <td>氏名</td>
+        <th>氏名</th>
         <td>{{ $participant->name }} ({{ $participant->furigana }})</td>
     </tr>
     <tr>
-        <td>座席番号(記念式典)</td>
-        <td>{{ $participant->seat_number }}</td>
+        <th>表彰式</th>
+        <td>{{ $participant->ceremony }} {{ $participant->ceremony_with }}</td>
     </tr>
     <tr>
-        <td>座席番号(レセプション)</td>
-        <td>{{ $participant->reception_seat_number }}</td>
+        <th>交歓会</th>
+        <td>{{ $participant->reception }}</td>
     </tr>
     <tr>
-        <td>県連盟</td>
+        <th>参加会議</th>
+        <td>{{ $participant->congress }}</td>
+    </tr>
+    <tr>
+        <th>テーマ集会</th>
+        <td>{{ $participant->theme_division }}</td>
+    </tr>
+    <tr>
+        <th>県連盟</th>
         <td>{{ $participant->pref }}</td>
     </tr>
     <tr>
-        <td>所属</td>
-        <td>{{ $participant->district }} {{ $participant->dan }}</td>
+        <th>所属</th>
+        <td>{{ $participant->dan }} {{ $participant->role_dan }}</td>
     </tr>
     <tr>
-        <td>役務</td>
-        <td>{{ $participant->role }}</td>
+        <th>地区役務</th>
+        <td>{{ $participant->role_district }}</td>
     </tr>
     <tr>
-        <td>email</td>
+        <th>県連役務</th>
+        <td>{{ $participant->role_council }}</td>
+    </tr>
+    <tr>
+        <th>日連役務</th>
+        <td>{{ $participant->role_saj }}</td>
+    </tr>
+    <tr>
+        <th>email</th>
         <td>{{ $participant->email }}</td>
     </tr>
     <tr>
-        <td>電話</td>
+        <th>電話</th>
         <td>{{ $participant->phone }}</td>
     </tr>
     <tr>
-        <td>住所</td>
-        <td>{{ $participant->zip }} {{ $participant->address }}</td>
-    </tr>
-    <tr>
-        <td>UUID<br>マイページ</td>
+        <th>UUID<br>マイページ</th>
         <td><a href="{{ url('/mypage?id=').$participant->uuid }}">{{ $participant->uuid }}</a></td>
     </tr>
     <tr>
-        <td>2次元コード</td>
+        <th>2次元コード</th>
         <td>{!! QrCode::size(150)->generate("https://rsvp-100th.scout.or.jp/mypage?id=" . $participant->uuid) !!}</td>
     </tr>
     <tr>
-        <td>チェックイン(記念式典)</td>
+        <th>チェックイン(表彰式)</th>
         <td>{{ $participant->checkedin_at }}</td>
     </tr>
     <tr>
-        <td>チェックイン(レセプション)</td>
+        <th>チェックイン(交歓会)</th>
         <td>{{ $participant->reception_checkedin_at }}</td>
     </tr>
     <tr>
-        <td>参加費振込</td>
-        <td>{{ $participant->fee_checked_at }}</td>
+        <th>備考</th>
+        <td>{{ $participant->memo }}</td>
+    </tr>
+    <tr>
+        <th>申込日</th>
+        <td>{{ $participant->created_at }}</td>
     </tr>
 </table>

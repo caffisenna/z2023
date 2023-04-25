@@ -20,7 +20,7 @@
             {!! Form::model($participant, ['route' => ['participants.update', $participant->id], 'method' => 'patch']) !!}
 
             <div class="card-body">
-                <div class="row">
+                <div class="">
                     @include('participants.fields')
                 </div>
             </div>

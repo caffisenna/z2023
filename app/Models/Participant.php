@@ -11,20 +11,27 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  * @package App\Models
  * @version February 6, 2022, 2:50 am UTC
  *
- * @property string $name
- * @property string $uuid
- * @property string $pref
- * @property string $district
- * @property string $dan
- * @property string $role
- * @property string $category
  * @property string $email
+ * @property string $name
+ * @property string $furigana
  * @property string $phone
- * @property string $seat_number
- * @property string $reception_seat_number
- * @property string $zip
- * @property string $address
- * @property string $fee_checked_at
+ * @property string $ceremony
+ * @property string $ceremony_with
+ * @property string $member
+ * @property string $pref
+ * @property string $dan
+ * @property string $role_dan
+ * @property string $role_district
+ * @property string $role_council
+ * @property string $role_saj
+ * @property string $reception
+ * @property string $congress
+ * @property string $organization
+ * @property string $living_area
+ * @property string $reason
+ * @property string $theme_division
+ * @property string $memo
+ * @property string $uuid
  */
 class Participant extends Model
 {
@@ -40,21 +47,27 @@ class Participant extends Model
 
 
     public $fillable = [
+        'email',
         'name',
         'furigana',
-        'uuid',
-        'pref',
-        'district',
-        'dan',
-        'category',
-        'role',
-        'email',
         'phone',
-        'seat_number',
-        'reception_seat_number',
-        'zip',
-        'address',
-        'fee_checked_at',
+        'ceremony',
+        'ceremony_with',
+        'member',
+        'pref',
+        'dan',
+        'role_dan',
+        'role_district',
+        'role_council',
+        'role_saj',
+        'reception',
+        'congress',
+        'organization',
+        'living_area',
+        'reason',
+        'theme_division',
+        'memo',
+        'uuid',
     ];
 
     /**
@@ -64,21 +77,27 @@ class Participant extends Model
      */
     protected $casts = [
         'id' => 'integer',
-        'category' => 'string',
+        'email' => 'string',
         'name' => 'string',
         'furigana' => 'string',
-        'uuid' => 'string',
-        'pref' => 'string',
-        'district' => 'string',
-        'dan' => 'string',
-        'role' => 'string',
-        'email' => 'string',
         'phone' => 'string',
-        'seat_number' => 'string',
-        'reception_seat_number' => 'string',
-        'zip' => 'string',
-        'address' => 'string',
-        'fee_checked_at' => 'date',
+        'ceremony' => 'string',
+        'ceremony_with' => 'string',
+        'member' => 'string',
+        'pref' => 'string',
+        'dan' => 'string',
+        'role_dan' => 'string',
+        'role_district' => 'string',
+        'role_council' => 'string',
+        'role_saj' => 'string',
+        'reception' => 'string',
+        'congress' => 'string',
+        'organization' => 'string',
+        'living_area' => 'string',
+        'reason' => 'string',
+        'theme_division' => 'string',
+        'memo' => 'string',
+        'uuid' => 'string',
     ];
 
     /**
@@ -89,14 +108,13 @@ class Participant extends Model
     public static $rules = [
         'name' => 'required',
         'furigana' => 'required',
-        'pref' => 'required',
-        'email' => 'nullable | required_unless:category,県連代表(5),県連代表(6)', // nullを許容してVS,BS以外は必須に
+        // 'email' => 'nullable | required_unless:category,県連代表(5),県連代表(6)', // nullを許容してVS,BS以外は必須に
     ];
 
     public static $messages = [
         'name.required' => '氏名を入力して下さい',
         'furigana.required' => 'ふりがなを入力して下さい',
-        'pref.required' => '県連盟を入力して下さい',
-        'email.required_unless' => 'emailを入力して下さい',
+        // 'pref.required' => '県連盟を入力して下さい',
+        // 'email.required_unless' => 'emailを入力して下さい',
     ];
 }

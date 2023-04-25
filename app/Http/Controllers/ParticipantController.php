@@ -44,24 +44,13 @@ class ParticipantController extends AppBaseController
     {
         if (isset($request->furigana)) {
             // 個別氏名をサーチ
-            // $participants = Participant::where('furigana', 'like', "$request->furigana%")->where('checkedin_at', null)->paginate(100);
             $participants = Participant::where('furigana', 'like', "$request->furigana%")->orwhere('name', 'like', "%$request->furigana%")->paginate(100); // チェックイン済みも取得して表示する
-
-            // foreachで回して、引率指導者の場合は同じ県連のBSとVSを引っかける
-            // $participant->vs $participant->bs などに格納
-            foreach ($participants as $value) {
-                if ($value->category == "県連代表(4)") {
-                    $value->vs = Participant::where('pref', $value->pref)->where('category', '県連代表(5)')->select('name')->first();
-                    $value->bs = Participant::where('pref', $value->pref)->where('category', '県連代表(6)')->select('name')->first();
-                }
-            }
 
             // 結果を返す
             return view('participants.index')->with('participants', $participants);
         }
 
         if (isset($request->prefecture)) {
-            // $participants = Participant::where('pref', "$request->prefecture")->where('checkedin_at', null)->paginate(100);
             $participants = Participant::where('pref', "$request->prefecture")->paginate(100); // チェックイン済みも取得して表示する
             return view('participants.index')->with('participants', $participants);
         }
@@ -93,7 +82,7 @@ class ParticipantController extends AppBaseController
 
         $participant = $this->participantRepository->create($input);
 
-        Flash::success('参加者を登録しました');
+        Flash::success("$participant->name さんを登録しました");
 
         return redirect(route('participants.index'));
     }
@@ -158,7 +147,7 @@ class ParticipantController extends AppBaseController
 
         $participant = $this->participantRepository->update($request->all(), $id);
 
-        Flash::success('更新しました');
+        Flash::success("$participant->name さんの情報を更新しました");
 
         return redirect(route('participants.index'));
     }
@@ -184,7 +173,7 @@ class ParticipantController extends AppBaseController
 
         $this->participantRepository->delete($id);
 
-        Flash::success('削除しました');
+        Flash::success("$participant->name さんを削除しました");
 
         return redirect(route('participants.index'));
     }
@@ -318,30 +307,7 @@ class ParticipantController extends AppBaseController
             '石川', '福井', '山梨', '長野', '岐阜', '静岡', '愛知', '三重', '滋賀',
             '京都', '大阪', '兵庫', '奈良', '和歌山', '鳥取', '島根', '岡山', '広島',
             '山口', '徳島', '香川', '愛媛', '高知', '福岡', '佐賀', '長崎', '熊本',
-            '大分', '宮崎', '鹿児島', '沖縄', '荻窪',
-            '行政（国）',
-            '行政（市）',
-            '会場関係者',
-            '①ボーイスカウト振興国会議員連盟',
-            '②１００周年募金',
-            '④B-Pフェロー',
-            '⑤資金醸成団体',
-            '表彰者',
-            '⑥宗教関係代表者会議代表者',
-            '⑦日本連盟名誉役員',
-            '⑧日本連盟評議員会',
-            '⑨日本連盟理事会',
-            '⑩日本連盟監事',
-            '⑩名誉会議',
-            '⑩教育顧問会議',
-            '⑩アンバサダー',
-            '⑪県連盟連盟長',
-            '新チャレンジ章協力企業',
-            '⑫企業',
-            '⑫関係団体（外部）',
-            '⑬関係団体（内部）',
-            'レセプション協力',
-            '日本連盟',
+            '大分', '宮崎', '鹿児島', '沖縄', '荻窪', '日本連盟',
         );
 
         return view('participants.sendmail_pref')->with('prefs', $prefs);

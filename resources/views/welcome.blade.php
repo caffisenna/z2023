@@ -15,15 +15,14 @@
 
 <body class="antialiased">
     <div style="background-color:#115740">
-        <p class="uk-text-default uk-text-center uk-margin-auto-vertical" style="color:#FFF">100周年記念式典 &
-            レセプション<br>デジタルパスのご案内
+        <p class="uk-text-default uk-text-center uk-margin-auto-vertical" style="color:#FFF">全国大会2023<br>デジタルパスのご案内
         </p>
     </div>
     <div class="uk-container uk-container-large">
 
         {{-- <button class="uk-button uk-button-primary uk-button-large uk-align-center uk-margin-large-top"
             onclick="location.href='{{ url('/login') }}'"><span uk-icon="sign-in"></span>ログイン</button> --}}
-        <h2>記念式典</h2>
+        <h2>表彰式</h2>
         <p class="uk-text-warning">記念式典の詳細につきましてはご案内のメールをご参照下さい。</p>
         <h3>デジタルパスの使用方法</h3>
         <ol>
@@ -119,7 +118,7 @@
 
 
 
-        ​<h2>レセプション</h2>
+        ​<h2>交歓会</h2>
         <p class="uk-text-warning">記念式典の詳細につきましてはご案内のメールをご参照下さい。</p>
 
         <h3>手荷物に関して(レセプション)</h3>

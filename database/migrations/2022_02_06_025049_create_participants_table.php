@@ -16,36 +16,32 @@ class CreateParticipantsTable extends Migration
     {
         Schema::create('participants', function (Blueprint $table) {
             $table->increments('id');
+            $table->dateTime('created_at');
+            $table->string('email')->nullable();
             $table->string('name');
             $table->string('furigana')->nullable();
-            $table->string('pref');
-            $table->string('district')->nullable();
-            $table->string('dan')->nullable();
-            $table->string('role')->nullable();
-            $table->string('category')->nullable();             // 招待カテゴリ
-            $table->string('is_proxy')->nullable();             // 代理 役職が入れば代理判定
-            $table->boolean('wheel_chair')->default(false);     // 車椅子 0 1
-            $table->string('with_helper')->nullable();          // 介助者同行 ID
-            $table->string('go_with_leader')->nullable();       // 同行親リーダー メアド or uuid
-            $table->string('go_with_scouts')->nullable();       // 引率されるスカウト uuid
-            $table->string('self_absent')->nullable();          // 欠席理由 自己入力, 指導者入力, 発熱NG
-            $table->string('reception_self_absent')->nullable();// レセプション欠席入力
-            $table->string('email')->nullable();
             $table->string('phone')->nullable();
-            $table->string('seat_number')->nullable();          // 式典座席
-            $table->string('reception_seat_number')->nullable();          // レセプション座席
-            $table->string('zip')->nullable();
-            $table->string('address')->nullable();
-            $table->dateTime('email_sent_at')->nullable();      // デジパス送信日時
-            $table->string('fee_checked_at')->nullable();       // 入金チェック
-            $table->string('no_fee')->nullable();               // 参加費不要フラグ
-            $table->string('saj_booth')->nullable();            // 日連受付ブースフラグ
-            $table->string('uuid')->unique();
-            $table->dateTime('checkedin_at')->nullable();           // 式典チェックイン
-            $table->dateTime('reception_checkedin_at')->nullable(); // レセプションチェックイン
-            $table->dateTime('gift_receipt')->nullable();           // 記念品受領
-            $table->dateTime('cloak_receipt')->nullable();          // クローク受領
-            $table->timestamps();
+            $table->string('ceremony')->nullable();             // 表彰式
+            $table->string('ceremony_with')->nullable();        // 表彰式同伴者
+            $table->string('member');                           // 加盟員 or not
+            $table->string('pref');                             // 県連
+            $table->string('dan')->nullable();                  // 団
+            $table->string('role_dan')->nullable();             // 役務
+            $table->string('role_district')->nullable();        // 地区役務
+            $table->string('role_council')->nullable();         // 県連役務
+            $table->string('role_saj')->nullable();             // 日連役務
+            $table->string('reception')->nullable();            // 交歓会参加
+            $table->string('congress')->nullable();             // 参加会議種別
+            $table->string('organization')->nullable();         // 所属団体
+            $table->string('living_area')->nullable();          // 居住エリア
+            $table->string('reason')->nullable();               // 参加理由
+            $table->string('theme_division')->nullable();       // テーマ集会
+            $table->string('memo')->nullable();                 // 連絡事項
+            $table->string('uuid')->nullable();                 // uuid
+            $table->dateTime('updated_at');
+            $table->dateTime('checkedin_at')->nullable();       // チェックイン
+            // $table->dateTime('reception_checkedin_at')->nullable(); // レセプションチェックイン
+            // $table->timestamps();
             $table->softDeletes();
         });
     }
