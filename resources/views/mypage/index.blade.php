@@ -46,16 +46,16 @@
                     <td class="uk-text-center">
                         <span class="uk-text-bold uk-text-large">
                             {{-- ここで来賓を明示する --}}
-                            @if ($participant->ceremony == '表彰式に参加する')
+                            @if ($participant->ceremony == '表彰式に参加する' || $participant->ceremony == '同伴者と二人で参加する')
                                 <span class="uk-text-danger"><span uk-icon="star"></span> 表彰ご参加 <span
                                         uk-icon="star"></span></span><br>
                             @endif
                             {{-- ここで来賓を明示する --}}
-                            {{ $participant->name }} 様
+                            <span class="uk-text-large">{{ $participant->name }} 様</span>
                             <br>
                             {{-- 同伴者 --}}
                             @if (isset($participant->ceremony_with))
-                                <span class="uk-text">ご同伴:{{ $participant->ceremony_with }}様</span>
+                                <span class="uk-text-default">ご同伴: {{ $participant->ceremony_with }} 様</span>
                             @endif
                             {{-- 同伴者 --}}
                         </span>
@@ -118,7 +118,7 @@
                     </td>
                 </tr>
             </table>
-            <p class="uk-text-warning uk-text-center uk-text-small">このページを受付でご提示下さい</p>
+            <p class="uk-text-default uk-text-center uk-text-small">この画面を受付でご提示下さい</p>
         </div>
         <footer class="" style="background-color:#115740; color:#fff">
             <p class="uk-text-small uk-text-center uk-margin-auto-vertical">受付システム<br>
