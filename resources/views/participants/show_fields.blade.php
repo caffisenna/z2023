@@ -53,7 +53,7 @@
     </tr>
     <tr>
         <th>2次元コード</th>
-        <td>{!! QrCode::size(150)->generate("https://rsvp-100th.scout.or.jp/mypage?id=" . $participant->uuid) !!}</td>
+        <td>{!! QrCode::size(150)->generate(url('/mypage?id=') . $participant->uuid) !!}</td>
     </tr>
     <tr>
         <th>チェックイン(表彰式)</th>
