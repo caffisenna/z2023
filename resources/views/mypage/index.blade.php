@@ -121,8 +121,9 @@
             <p class="uk-text-default uk-text-center uk-text-small">この画面を受付でご提示下さい</p>
         </div>
         <footer class="" style="background-color:#115740; color:#fff">
-            <p class="uk-text-small uk-text-center uk-margin-auto-vertical">受付システム<br>
-                {{ config('app.name') }} &copy;</p>
+            <p class="uk-text-small uk-text-center uk-margin-auto-vertical">{{ config('app.name') }}<br>
+                受付システム&copy;
+            </p>
         </footer>
     </div>
 
