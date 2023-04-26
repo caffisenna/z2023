@@ -92,7 +92,7 @@
 
         <!-- Main Footer -->
         <footer class="main-footer" style="background-color:#115740; color:#fff">
-            <p class="uk-text-small uk-text-center">100周年記念式典部会<br>
+            <p class="uk-text-small uk-text-center">受付システム<br>
                 {{ config('app.name') }} &copy;</p>
         </footer>
     </div>

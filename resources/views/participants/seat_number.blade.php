@@ -317,8 +317,8 @@
 
         </div>
         <footer class="main-footer" style="background-color:#115740; color:#fff">
-            <p class="uk-text-small uk-text-center">100周年記念式典部会<br>
-                {{ config('app.name') }} &copy;</p>
+            <p class="uk-text-small uk-text-center">{{ config('app.name') }}<br>
+                受付システム &copy;</p>
         </footer>
         <script type="text/javascript">
             $(document).ready(function() {

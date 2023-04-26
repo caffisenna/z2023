@@ -44,36 +44,36 @@
     <div class="wrapper">
 
         {{-- <div class="content-wrapper"> --}}
-            <section class="content">
-                <div class="container">
-                    <div class="row">
+        <section class="content">
+            <div class="container">
+                <div class="row">
 
-                        <p class="uk-text-large">チェックイン状況</p>
-                        <table class="uk-table uk-table-divider uk-table-striped uk-table-hover">
+                    <p class="uk-text-large">チェックイン状況</p>
+                    <table class="uk-table uk-table-divider uk-table-striped uk-table-hover">
+                        <tr>
+                            <th>カテゴリ</th>
+                            <th>人数</th>
+                        </tr>
+                        @foreach ($participants as $participant)
                             <tr>
-                                <th>カテゴリ</th>
-                                <th>人数</th>
+                                <td class="uk-text-default">{{ $participant['name'] }}</td>
+                                <td><span class="uk-text-success">{{ $participant['checked_in'] }}</span> /
+                                    {{ $participant['count'] }}</td>
                             </tr>
-                            @foreach ($participants as $participant)
-                                <tr>
-                                    <td class="uk-text-default">{{ $participant['name'] }}</td>
-                                    <td><span class="uk-text-success">{{ $participant['checked_in'] }}</span> /
-                                        {{ $participant['count'] }}</td>
-                                </tr>
-                            @endforeach
-                        </table>
+                        @endforeach
+                    </table>
 
-                    </div>
                 </div>
-        {{-- </div> --}}
+            </div>
+            {{-- </div> --}}
         </section>
     </div>
 
     <!-- Main Footer -->
 
     <footer class="" style="background-color:#115740; color:#fff">
-        <p class="uk-text-small uk-text-center">100周年記念式典部会<br>
-            {{ config('app.name') }} &copy;</p>
+        <p class="uk-text-small uk-text-center">
+            {{ config('app.name') }} <br> 受付システム &copy;</p>
     </footer>
 
     </div>
