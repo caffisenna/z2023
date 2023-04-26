@@ -39,7 +39,7 @@
         </div>
         @include('flash::message')
         <div class=" uk-margin uk-text-center">
-            <img src="{{ url('/images/logo-sp.jpg') }}">
+            <img src="{{ url('/images/logo-sp.png') }}">
         </div>
         <div class="card-body p-0">
             <table class="uk-table">
