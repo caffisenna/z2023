@@ -54,7 +54,7 @@
                             <span class="uk-text-large">{{ $participant->name }} 様</span>
                             <br>
                             {{-- 同伴者 --}}
-                            @if (isset($participant->ceremony_with))
+                            @if ($participant->ceremony_with)
                                 <span class="uk-text-default">ご同伴: {{ $participant->ceremony_with }} 様</span>
                             @endif
                             {{-- 同伴者 --}}
