@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers;
 
-// use App\Http\Requests\Createadd_userRequest;
-// use App\Http\Requests\Updateadd_userRequest;
 use App\Repositories\add_userRepository;
 use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
@@ -30,9 +28,14 @@ class add_userController extends AppBaseController
      */
     public function index(Request $request)
     {
-        // $addUsers = $this->addUserRepository->all();
         $addUsers = User::all();
-        // dd($addUsers);
+        foreach($addUsers as $val){
+            if($val['is_admin'] == 1){
+                $val['role'] = "管理者";
+            }elseif($val['is_staff'] == 1){
+                $val['role'] = "スタッフ";
+            }
+        }
 
         return view('add_users.index')
             ->with('addUsers', $addUsers);
@@ -72,71 +75,6 @@ class add_userController extends AppBaseController
         $user->save();
 
         Flash::success('Add User saved successfully.');
-
-        return redirect(route('addUsers.index'));
-    }
-
-    /**
-     * Display the specified add_user.
-     *
-     * @param int $id
-     *
-     * @return Response
-     */
-    public function show($id)
-    {
-        $addUser = $this->addUserRepository->find($id);
-
-        if (empty($addUser)) {
-            Flash::error('Add User not found');
-
-            return redirect(route('addUsers.index'));
-        }
-
-        return view('add_users.show')->with('addUser', $addUser);
-    }
-
-    /**
-     * Show the form for editing the specified add_user.
-     *
-     * @param int $id
-     *
-     * @return Response
-     */
-    public function edit($id)
-    {
-        $addUser = $this->addUserRepository->find($id);
-
-        if (empty($addUser)) {
-            Flash::error('Add User not found');
-
-            return redirect(route('addUsers.index'));
-        }
-
-        return view('add_users.edit')->with('addUser', $addUser);
-    }
-
-    /**
-     * Update the specified add_user in storage.
-     *
-     * @param int $id
-     * @param Updateadd_userRequest $request
-     *
-     * @return Response
-     */
-    public function update($id, Updateadd_userRequest $request)
-    {
-        $addUser = $this->addUserRepository->find($id);
-
-        if (empty($addUser)) {
-            Flash::error('Add User not found');
-
-            return redirect(route('addUsers.index'));
-        }
-
-        $addUser = $this->addUserRepository->update($request->all(), $id);
-
-        Flash::success('Add User updated successfully.');
 
         return redirect(route('addUsers.index'));
     }
