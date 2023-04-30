@@ -51,7 +51,11 @@ class ParticipantController extends AppBaseController
         }
 
         if (isset($request->prefecture)) {
-            $participants = Participant::where('pref', "$request->prefecture")->paginate(100); // チェックイン済みも取得して表示する
+            if ($request->prefecture == '一般') {
+                $participants = Participant::where('member', '一般（非加盟員）')->paginate(100); // チェックイン済みも取得して表示する
+            } else {
+                $participants = Participant::where('pref', "$request->prefecture")->paginate(100); // チェックイン済みも取得して表示する
+            }
             return view('participants.index')->with('participants', $participants);
         }
     }
