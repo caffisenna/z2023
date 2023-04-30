@@ -40,8 +40,7 @@ class CreateParticipantsTable extends Migration
             $table->string('uuid')->nullable();                 // uuid
             $table->dateTime('updated_at');
             $table->dateTime('checkedin_at')->nullable();       // チェックイン
-            // $table->dateTime('reception_checkedin_at')->nullable(); // レセプションチェックイン
-            // $table->timestamps();
+            $table->dateTime('reception_checkedin_at')->nullable(); // 交歓会チェックイン
             $table->softDeletes();
         });
     }
