@@ -25,7 +25,7 @@
                 <table class="uk-table uk-table-divider uk-table-striped uk-table-hover">
                     <tr>
                         <th>カテゴリ</th>
-                        <th>表彰式</th>
+                        <th>全体会</th>
                         <th>交歓会</th>
                     </tr>
                     @foreach ($participants as $participant)

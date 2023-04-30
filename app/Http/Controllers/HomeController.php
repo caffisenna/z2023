@@ -67,7 +67,7 @@ class HomeController extends Controller
             // カウント
             $participants = Participant::select(
                 'pref',
-                \DB::raw('SUM(CASE WHEN ceremony = "表彰式に参加する" OR ceremony = "同伴者と二人で参加する" THEN 1 ELSE 0 END) as ceremony_yes_count'),
+                \DB::raw('SUM(CASE WHEN name IS NOT NULL THEN 1 ELSE 0 END) as ceremony_yes_count'),
                 \DB::raw('SUM(CASE WHEN checkedin_at IS NOT NULL THEN 1 ELSE 0 END) as ceremony_checkedin_count'), // チェックイン済み
                 \DB::raw('SUM(CASE WHEN reception = "参加する" THEN 1 ELSE 0 END) as reception_yes_count'),
                 \DB::raw('SUM(CASE WHEN reception_checkedin_at IS NOT NULL THEN 1 ELSE 0 END) as reception_checkedin_count'), // チェックイン済み
