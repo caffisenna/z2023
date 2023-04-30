@@ -46,24 +46,12 @@
                                     <td>氏名</td>
                                     <td>{{ $participant->name }} 様</td>
                                 </tr>
+                                @if(isset($participant->ceremony))
                                 <tr>
-                                    <td>座席</td>
-                                    <td>
-                                        @if (isset($participant->seat_number))
-                                            記念式典: {{ $participant->seat_number }}
-                                            @if (isset($participant->self_absent))
-                                                <br><span class="uk-text-danger">式典ご欠席</span>
-                                            @endif
-                                            <br>
-                                        @endif
-                                        @if (isset($participant->reception_seat_number))
-                                            レセプション: {{ $participant->reception_seat_number }}
-                                            @if (isset($participant->reception_self_absent))
-                                                <br><span class="uk-text-danger">レセプションご欠席</span>
-                                            @endif
-                                        @endif
-                                    </td>
+                                    <td>表彰</td>
+                                    <td><span class="uk-text-danger">表彰参加者</span></td>
                                 </tr>
+                                @endif
                                 <tr>
                                     <td>所属</td>
                                     <td>{{ $participant->pref }}連盟 @if ($participant->district)
@@ -76,7 +64,7 @@
                                 </tr>
                                 <tr>
                                     <td>役務</td>
-                                    <td>{{ $participant->role }}</td>
+                                    <td>{{ $participant->role_dan }}</td>
                                 </tr>
                                 <tr>
                                     <td>日時</td>
