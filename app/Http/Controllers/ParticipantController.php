@@ -389,16 +389,22 @@ class ParticipantController extends AppBaseController
         }
 
         if (isset($participant)) {
-            if ($q == 'ceremony')
-                $participant->self_absent = 'スタッフ入力';
-            elseif ($q == 'reception') {
-                $participant->reception_self_absent = 'スタッフ入力';
+            if ($q == 'ceremony') {
+                $participant->absent_ceremony = 1;
+                Flash::success($participant->name . 'の全体会欠席入力をしました');
+            } elseif ($q == 'reception') {
+                $participant->absent_reception = 1;
+                Flash::success($participant->name . 'の交歓会欠席入力をしました');
+            } elseif ($q == 'cancel_ceremony') { // 欠席キャンセル
+                $participant->absent_ceremony = 0;
+                Flash::success($participant->name . 'の全体会欠席を取り消ししました');
+            } elseif ($q == 'cancel_reception') { // 欠席キャンセル
+                $participant->absent_reception = 0;
+                Flash::success($participant->name . 'の交歓会欠席を取り消ししました');
             }
             $participant->save();
         }
 
-        Flash::success($participant->name . 'の欠席入力をしました');
-
-        return redirect(route('participants.index'));
+        return back();
     }
 }

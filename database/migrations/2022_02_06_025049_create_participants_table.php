@@ -38,6 +38,8 @@ class CreateParticipantsTable extends Migration
             $table->string('theme_division')->nullable();       // テーマ集会
             $table->string('memo')->nullable();                 // 連絡事項
             $table->string('uuid')->nullable();                 // uuid
+            $table->boolean('absent_ceremony');                 // 全体会欠席
+            $table->boolean('absent_reception');                // 交歓会欠席
             $table->dateTime('updated_at');
             $table->dateTime('checkedin_at')->nullable();       // チェックイン
             $table->dateTime('reception_checkedin_at')->nullable(); // 交歓会チェックイン

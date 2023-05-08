@@ -16,67 +16,67 @@ namespace App\Models{
  *
  * @package App\Models
  * @version February 6, 2022, 2:50 am UTC
- * @property string $name
- * @property string $uuid
- * @property string $pref
- * @property string $district
- * @property string $dan
- * @property string $role
- * @property string $category
  * @property string $email
+ * @property string $name
+ * @property string $furigana
  * @property string $phone
- * @property string $seat_number
- * @property string $reception_seat_number
- * @property string $zip
- * @property string $address
- * @property string $fee_checked_at
+ * @property string $ceremony
+ * @property string $ceremony_with
+ * @property string $member
+ * @property string $pref
+ * @property string $dan
+ * @property string $role_dan
+ * @property string $role_district
+ * @property string $role_council
+ * @property string $role_saj
+ * @property string $reception
+ * @property string $congress
+ * @property string $organization
+ * @property string $living_area
+ * @property string $reason
+ * @property string $theme_division
+ * @property string $memo
+ * @property string $uuid
  * @property int $id
- * @property string|null $furigana
- * @property string|null $is_proxy
- * @property int $wheel_chair
- * @property string|null $with_helper
- * @property string|null $go_with_leader
- * @property string|null $go_with_scouts
- * @property string|null $self_absent
+ * @property \Illuminate\Support\Carbon $created_at
+ * @property \Illuminate\Support\Carbon $updated_at
  * @property string|null $checkedin_at
  * @property string|null $reception_checkedin_at
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
  * @property \Illuminate\Support\Carbon|null $deleted_at
  * @method static \Database\Factories\ParticipantFactory factory(...$parameters)
  * @method static \Illuminate\Database\Eloquent\Builder|Participant newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Participant newQuery()
- * @method static \Illuminate\Database\Query\Builder|Participant onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|Participant onlyTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder|Participant query()
- * @method static \Illuminate\Database\Eloquent\Builder|Participant whereAddress($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Participant whereCategory($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Participant whereCeremony($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Participant whereCeremonyWith($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Participant whereCheckedinAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Participant whereCongress($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Participant whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Participant whereDan($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Participant whereDeletedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Participant whereDistrict($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Participant whereEmail($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Participant whereFeeCheckedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Participant whereFurigana($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Participant whereGoWithLeader($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Participant whereGoWithScouts($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Participant whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Participant whereIsProxy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Participant whereLivingArea($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Participant whereMember($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Participant whereMemo($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Participant whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Participant whereOrganization($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Participant wherePhone($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Participant wherePref($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Participant whereReason($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Participant whereReception($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Participant whereReceptionCheckedinAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Participant whereReceptionSeatNumber($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Participant whereRole($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Participant whereSeatNumber($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Participant whereSelfAbsent($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Participant whereRoleCouncil($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Participant whereRoleDan($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Participant whereRoleDistrict($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Participant whereRoleSaj($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Participant whereThemeDivision($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Participant whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Participant whereUuid($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Participant whereWheelChair($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Participant whereWithHelper($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Participant whereZip($value)
- * @method static \Illuminate\Database\Query\Builder|Participant withTrashed()
- * @method static \Illuminate\Database\Query\Builder|Participant withoutTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|Participant withTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|Participant withoutTrashed()
  */
 	class Participant extends \Eloquent {}
 }
@@ -102,19 +102,22 @@ namespace App\Models{
  * @property int $id
  * @property int|null $user_id
  * @property string|null $birth_day
+ * @property string $uuid
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property string|null $checkedin_at
  * @property \Illuminate\Support\Carbon|null $deleted_at
  * @property-read \App\Models\User|null $user
  * @method static \Database\Factories\StaffinfoFactory factory(...$parameters)
  * @method static \Illuminate\Database\Eloquent\Builder|Staffinfo newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Staffinfo newQuery()
- * @method static \Illuminate\Database\Query\Builder|Staffinfo onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|Staffinfo onlyTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder|Staffinfo query()
  * @method static \Illuminate\Database\Eloquent\Builder|Staffinfo whereAddress($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Staffinfo whereBirthDay($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Staffinfo whereBsId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Staffinfo whereCellPhone($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Staffinfo whereCheckedinAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Staffinfo whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Staffinfo whereDan($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Staffinfo whereDeletedAt($value)
@@ -128,9 +131,10 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Staffinfo whereTeam($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Staffinfo whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Staffinfo whereUserId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Staffinfo whereUuid($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Staffinfo whereZip($value)
- * @method static \Illuminate\Database\Query\Builder|Staffinfo withTrashed()
- * @method static \Illuminate\Database\Query\Builder|Staffinfo withoutTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|Staffinfo withTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|Staffinfo withoutTrashed()
  */
 	class Staffinfo extends \Eloquent {}
 }
@@ -144,16 +148,15 @@ namespace App\Models{
  * @property string $email
  * @property int $is_admin
  * @property int $is_staff
- * @property string|null $is_pref
  * @property \Illuminate\Support\Carbon|null $email_verified_at
  * @property string $password
  * @property string|null $remember_token
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $notifications
+ * @property-read \Illuminate\Notifications\DatabaseNotificationCollection<int, \Illuminate\Notifications\DatabaseNotification> $notifications
  * @property-read int|null $notifications_count
  * @property-read \App\Models\Staffinfo|null $staffinfo
- * @property-read \Illuminate\Database\Eloquent\Collection|\Laravel\Sanctum\PersonalAccessToken[] $tokens
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Laravel\Sanctum\PersonalAccessToken> $tokens
  * @property-read int|null $tokens_count
  * @method static \Database\Factories\UserFactory factory(...$parameters)
  * @method static \Illuminate\Database\Eloquent\Builder|User newModelQuery()
@@ -164,7 +167,6 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|User whereEmailVerifiedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereIsAdmin($value)
- * @method static \Illuminate\Database\Eloquent\Builder|User whereIsPref($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereIsStaff($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User wherePassword($value)
@@ -172,5 +174,26 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|User whereUpdatedAt($value)
  */
 	class User extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * Class add_user
+ *
+ * @package App\Models
+ * @version April 28, 2023, 10:24 pm JST
+ * @property string $name
+ * @property string $email
+ * @property string $role
+ * @property string $password
+ * @method static \Database\Factories\add_userFactory factory(...$parameters)
+ * @method static \Illuminate\Database\Eloquent\Builder|add_user newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|add_user newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|add_user onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|add_user query()
+ * @method static \Illuminate\Database\Eloquent\Builder|add_user withTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|add_user withoutTrashed()
+ */
+	class add_user extends \Eloquent {}
 }
 

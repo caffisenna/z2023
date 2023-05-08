@@ -109,10 +109,6 @@
                                 'class' => 'btn btn-danger btn-xs',
                                 'onclick' => "return confirm('本当に削除しますか?')",
                             ]) !!}
-                            <a href="{{ url('/admin/absent/') }}/?q=ceremony&uuid={{ $participant->uuid }}"
-                                class='btn btn-default btn-xs uk-button-danger'>式典</a>
-                            <a href="{{ url('/admin/absent/') }}/?q=reception&uuid={{ $participant->uuid }}"
-                                class='btn btn-default btn-xs uk-button-danger'>レセ</a>
                         </div>
                         {!! Form::close() !!}
                     </td>
