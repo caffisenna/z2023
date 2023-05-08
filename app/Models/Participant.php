@@ -67,6 +67,9 @@ class Participant extends Model
         'reason',
         'theme_division',
         'memo',
+        'staff_memo',
+        'absent_ceremny',
+        'absent_reception',
         'uuid',
     ];
 
@@ -98,6 +101,9 @@ class Participant extends Model
         'theme_division' => 'string',
         'memo' => 'string',
         'uuid' => 'string',
+        'staff_memo' => 'string',
+        'absent_ceremny' => 'boolean',
+        'absent_reception' => 'boolean',
     ];
 
     /**

@@ -39,6 +39,9 @@ namespace App\Models{
  * @property string $uuid
  * @property int $id
  * @property \Illuminate\Support\Carbon $created_at
+ * @property string|null $staff_memo
+ * @property int $absent_ceremony
+ * @property bool $absent_reception
  * @property \Illuminate\Support\Carbon $updated_at
  * @property string|null $checkedin_at
  * @property string|null $reception_checkedin_at
@@ -48,6 +51,8 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Participant newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Participant onlyTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder|Participant query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Participant whereAbsentCeremony($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Participant whereAbsentReception($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Participant whereCeremony($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Participant whereCeremonyWith($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Participant whereCheckedinAt($value)
@@ -72,6 +77,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Participant whereRoleDan($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Participant whereRoleDistrict($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Participant whereRoleSaj($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Participant whereStaffMemo($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Participant whereThemeDivision($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Participant whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Participant whereUuid($value)

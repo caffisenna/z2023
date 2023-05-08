@@ -332,3 +332,10 @@
     {!! Form::textarea('memo', null, ['class' => 'form-control']) !!}
 </div>
 
+<h3 class="uk-text-primary">スタッフメモ</h3>
+
+<div class="form-group col-sm-6">
+    {!! Form::label('staff_memo', 'スタッフメモ:') !!}
+    {!! Form::textarea('staff_memo', null, ['class' => 'form-control']) !!}
+</div>
+

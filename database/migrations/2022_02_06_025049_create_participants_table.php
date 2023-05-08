@@ -37,6 +37,7 @@ class CreateParticipantsTable extends Migration
             $table->string('reason')->nullable();               // 参加理由
             $table->string('theme_division')->nullable();       // テーマ集会
             $table->string('memo')->nullable();                 // 連絡事項
+            $table->text('staff_memo')->nullable();             // スタッフメモ
             $table->string('uuid')->nullable();                 // uuid
             $table->boolean('absent_ceremony');                 // 全体会欠席
             $table->boolean('absent_reception');                // 交歓会欠席
