@@ -25,26 +25,30 @@ class AdminCancelController extends AppBaseController
             $uuid = $request['uuid'];
             $cat = $request['cat'];
             $cancel = Participant::where('uuid', $uuid)->firstorfail();
-            if ($cat == 'checkin') { // チェックインのキャンセル
+            if ($cat == 'ceremony_checkin') { // チェックインのキャンセル
                 $cancel->checkedin_at = NULL;
                 $cancel->save();
-                Flash::success($cancel->name . "さんのチェックイン処理を取り消しました");
+                Flash::success($cancel->name . "さんの全体会チェックイン処理を取り消しました");
                 return back();
-            } elseif ($cat == 'absent') { // 欠席手続きのキャンセル
-                $cancel->self_absent = NULL;
+            } elseif ($cat == 'reception_checkin') { // チェックインのキャンセル
+                $cancel->reception_checkedin_at = NULL;
                 $cancel->save();
-                Flash::success($cancel->name . "さんの欠席処理を取り消しました");
+                Flash::success($cancel->name . "さんの交歓会チェックイン処理を取り消しました");
                 return back();
-            } elseif ($cat == 'reception_absent') { // 欠席手続きのキャンセル
-                $cancel->reception_self_absent = NULL;
+            } elseif ($cat == 'absent_ceremony') { // 欠席手続きのキャンセル
+                $cancel->absent_ceremony = NULL;
                 $cancel->save();
-                Flash::success($cancel->name . "さんの欠席処理(レセプション)を取り消しました");
+                Flash::success($cancel->name . "さんの全体会欠席処理を取り消しました");
+                return back();
+            } elseif ($cat == 'absent_reception') { // 欠席手続きのキャンセル
+                $cancel->absent_reception = NULL;
+                $cancel->save();
+                Flash::success($cancel->name . "さんの交歓会欠席処理を取り消しました");
                 return back();
             }
         } else { // 何もリクエストがないとき
             $participants = Participant::where('checkedin_at', '<>', NULL)
-                ->orwhere('self_absent', '<>', NULL)
-                ->orwhere('reception_self_absent', '<>', NULL)
+                ->orwhere('reception_checkedin_at', '<>', NULL)
                 ->orderby('id', 'asc')->get();
 
             // $participant->save();

@@ -80,9 +80,10 @@
                         <thead>
                             <tr>
                                 <th>氏名</th>
-                                <th>チェックイン</th>
-                                <th>式典欠席</th>
-                                <th>レセ欠席</th>
+                                <th>全体会チェックイン</th>
+                                <th>交歓会チェックイン</th>
+                                <th>全体会欠席</th>
+                                <th>交歓会欠席</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -92,36 +93,40 @@
                                         <a
                                             href="{{ route('participants.show', [$participant->id]) }}">{{ $participant->name }}</a><br>
                                         {{ $participant->pref }}<br>
-                                        @if (isset($participant->seat_number))
-                                            式典:{{ $participant->seat_number }}
-                                        @endif
-                                        @if (isset($participant->reception_seat_number))
-                                            レセ:{{ $participant->reception_seat_number }}
-                                        @endif
                                     </td>
-                                    {{-- チェックイン処理 --}}
+                                    {{-- 全体会チェックイン処理 --}}
                                     <td>
                                         @if (isset($participant->checkedin_at))
-                                            <a href="{{ url('/admin/cancel/?cat=checkin&uuid=') . $participant->uuid }}"
+                                            <a href="{{ url('/admin/cancel/?cat=ceremony_checkin&uuid=') . $participant->uuid }}"
                                                 class="uk-button uk-button-danger uk-button-small"
-                                                onclick="return confirm('{{ $participant->name }}のチェックイン処理を取り消しますか?')"><span
+                                                onclick="return confirm('{{ $participant->name }}の全体会チェックインを取り消しますか?')"><span
                                                     uk-icon="ban"></span></a>
                                         @endif
                                     </td>
-                                    {{-- 欠席処理 --}}
+                                    {{-- 交歓会チェックイン処理 --}}
                                     <td>
-                                        @if (isset($participant->self_absent))
-                                            <a href="{{ url('/admin/cancel/?cat=absent&uuid=') . $participant->uuid }}"
+                                        @if (isset($participant->reception_checkedin_at))
+                                            <a href="{{ url('/admin/cancel/?cat=reception_checkin&uuid=') . $participant->uuid }}"
                                                 class="uk-button uk-button-danger uk-button-small"
-                                                onclick="return confirm('{{ $participant->name }}の欠席処理(式典)を取り消しますか?')"><span
+                                                onclick="return confirm('{{ $participant->name }}の交歓会チェックインを取り消しますか?')"><span
                                                     uk-icon="ban"></span></a>
                                         @endif
                                     </td>
+                                    {{-- 全体会欠席処理 --}}
                                     <td>
-                                        @if (isset($participant->reception_self_absent))
-                                            <a href="{{ url('/admin/cancel/?cat=reception_absent&uuid=') . $participant->uuid }}"
+                                        @if ($participant->absent_ceremony == 1)
+                                            <a href="{{ url('/admin/cancel/?cat=absent_ceremony&uuid=') . $participant->uuid }}"
                                                 class="uk-button uk-button-danger uk-button-small"
-                                                onclick="return confirm('{{ $participant->name }}の欠席処理(レセプション)を取り消しますか?')"><span
+                                                onclick="return confirm('{{ $participant->name }}の全体会の欠席処理を取り消しますか?')"><span
+                                                    uk-icon="ban"></span></a>
+                                        @endif
+                                    </td>
+                                    {{-- 交歓会欠席処理 --}}
+                                    <td>
+                                        @if ($participant->absent_reception == 1)
+                                            <a href="{{ url('/admin/cancel/?cat=absent_reception&uuid=') . $participant->uuid }}"
+                                                class="uk-button uk-button-danger uk-button-small"
+                                                onclick="return confirm('{{ $participant->name }}の交歓会の欠席処理を取り消しますか?')"><span
                                                     uk-icon="ban"></span></a>
                                         @endif
                                     </td>
