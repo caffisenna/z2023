@@ -17,6 +17,12 @@
     <!-- UIkit JS -->
     <script src="{{ url('js/uikit.min.js') }}"></script>
     <script src="{{ url('js/uikit-icons.min.js') }}"></script>
+
+    <!-- iOS用 -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+
+    <!-- Android用 -->
+    <meta name="mobile-web-app-capable" content="yes">
 </head>
 
 <body class="uk-container-xsmall">
