@@ -41,10 +41,17 @@ class MyPageController extends AppBaseController
         return view('mypage.index')
             ->with('participant', $participant);
     }
-    public function self_checkin(Request $request){
+    public function self_checkin(Request $request)
+    {
         if (isset($request->uuid)) {
             $participant = Participant::where('uuid', $request->uuid)->firstorfail();
+            if ($request->confirm) {
+                $participant->checkedin_at = now();
+                $participant->save();
+            }
+            return view('mypage.self_checkin')->with('participant', $participant);
+        } else {
+            return back();
         }
-        return view('mypage.self_checkin')->with('participant', $participant);
     }
 }

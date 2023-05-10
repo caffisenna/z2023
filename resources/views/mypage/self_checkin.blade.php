@@ -30,12 +30,29 @@
             <img src="{{ url('/images/logo-sp.png') }}" width="150px">
             <p class="uk-text-large uk-text-center uk-text-primary">セルフチェックイン</p>
         </div>
-        <div class="card-body p-0">
-            <div class="uk-text-center uk-margin">
-                <a href="#" class="uk-button uk-button-primary uk-button-large"
-                    onclick="return confirm('{{ $participant->name }}様ご自身でチェックイン処理をしますか?')">チェックインする</a>
+        @unless ($participant->checkedin_at)
+            <div class="card-body p-0">
+                <div class="uk-text-center uk-margin">
+                    <div class="uk-text-center uk-margin">
+                        {!! Form::open(['route' => 'self_checkin', 'method' => 'POST', 'onsubmit' => 'return beforeSubmit()']) !!}
+                        {!! Form::hidden('uuid', $participant->uuid, null) !!}
+                        {!! Form::hidden('confirm', 'true', null) !!}
+                        {!! Form::submit('チェックインする', [
+                            'class' => 'uk-button uk-button-primary uk-button-large',
+                        ]) !!}
+                        {!! Form::close() !!}
+                    </div>
+                </div>
             </div>
-        </div>
+        @endunless
+        @if ($participant->checkedin_at)
+            <div class="card-body p-0">
+                <div class="uk-text-center uk-margin">
+                    <img src="{{ url('/images/passed_ceremony.png') }}" alt="" width="" height=""><br>
+                    <span>この画面を受付スタッフに見せてご入場ください</span>
+                </div>
+            </div>
+        @endif
     </div>
     <div uk-sticky="position: bottom" style="background-color:#115740; color:#fff">
         <p class="uk-text-small uk-text-center">
@@ -44,7 +61,15 @@
         </p>
     </div>
 
-
+    <script>
+        function beforeSubmit() {
+            if (window.confirm('ご自身でチェックインしますか?')) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    </script>
 </body>
 
 </html>
