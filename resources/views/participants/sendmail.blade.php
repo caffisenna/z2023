@@ -104,14 +104,6 @@
                                 <tr>
                                     <td><a
                                             href="{{ route('participants.show', [$participant->id]) }}">{{ $participant->name }}</a>
-                                        <span class="uk-text-warning">
-                                            @if (isset($participant->vs))
-                                                <br>VS:{{ $participant->vs->name }}
-                                            @endif
-                                            @if (isset($participant->bs))
-                                                <br>BS:{{ $participant->bs->name }}
-                                            @endif
-                                        </span>
                                     </td>
                                     <td>{{ $participant->pref }}</td>
                                     <td>{{ $participant->district }}

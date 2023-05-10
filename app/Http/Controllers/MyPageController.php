@@ -41,21 +41,10 @@ class MyPageController extends AppBaseController
         return view('mypage.index')
             ->with('participant', $participant);
     }
-
-    public function self_absent(Request $request)
-    {
-        // $request['absent'] requestでUUIDが入ってくる
-        $uuid = $request['absent'];
-        $scout = Participant::where('uuid', $uuid)->firstorfail();
-        if ($request['q'] == 'reception') {
-            $scout->reception_self_absent = '自己入力';
-        } else {
-            $scout->self_absent = '自己入力';
+    public function self_checkin(Request $request){
+        if (isset($request->uuid)) {
+            $participant = Participant::where('uuid', $request->uuid)->firstorfail();
         }
-        $scout->save();
-
-        Flash::success($scout->name . 'さんの欠席処理をしました');
-
-        return back();
+        return view('mypage.self_checkin')->with('participant', $participant);
     }
 }

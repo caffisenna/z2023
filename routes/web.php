@@ -23,8 +23,8 @@ Route::Redirect('/register', '/', 301);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/mypage', [App\Http\Controllers\MyPageController::class, 'index'])->name('mypage');
-Route::get('/self', [App\Http\Controllers\MyPageController::class, 'self_absent'])->name('self_absent'); // 自己欠席入力
-Route::get('/self_check_in', [App\Http\Controllers\Check_InController::class, 'self_check_in'])->name('self_check_in'); // 自己チェックイン
+Route::post('/mypage', [App\Http\Controllers\MyPageController::class, 'self_checkin'])->name('self_checkin');
+// Route::get('/self_check_in', [App\Http\Controllers\Check_InController::class, 'self_check_in'])->name('self_check_in'); // 自己チェックイン
 Route::get('/receipt', [App\Http\Controllers\Check_InController::class, 'receipt'])->name('receipt'); // 記念品・クローク受領
 Route::get('/checkin_status', [App\Http\Controllers\Check_InController::class, 'status'])->name('status'); // チェックインスターテス
 Route::get('/staff_checkin', [App\Http\Controllers\StaffinfoController::class, 'staff_checkin'])->name('staff_checkin'); // ログインなしのチェックイン
