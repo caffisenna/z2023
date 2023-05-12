@@ -40,8 +40,8 @@ namespace App\Models{
  * @property int $id
  * @property \Illuminate\Support\Carbon $created_at
  * @property string|null $staff_memo
- * @property int $absent_ceremony
- * @property bool $absent_reception
+ * @property int|null $absent_ceremony
+ * @property bool|null $absent_reception
  * @property \Illuminate\Support\Carbon $updated_at
  * @property string|null $checkedin_at
  * @property string|null $reception_checkedin_at
@@ -89,64 +89,6 @@ namespace App\Models{
 
 namespace App\Models{
 /**
- * Class Staffinfo
- *
- * @package App\Models
- * @version October 7, 2022, 10:00 pm JST
- * @property string $furigana
- * @property string $gender
- * @property string $bs_id
- * @property string $prefecture
- * @property string $district
- * @property string $dan
- * @property string $role
- * @property string $cell_phone
- * @property string $zip
- * @property string $address
- * @property string $memo
- * @property string $team
- * @property int $id
- * @property int|null $user_id
- * @property string|null $birth_day
- * @property string $uuid
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property string|null $checkedin_at
- * @property \Illuminate\Support\Carbon|null $deleted_at
- * @property-read \App\Models\User|null $user
- * @method static \Database\Factories\StaffinfoFactory factory(...$parameters)
- * @method static \Illuminate\Database\Eloquent\Builder|Staffinfo newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Staffinfo newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Staffinfo onlyTrashed()
- * @method static \Illuminate\Database\Eloquent\Builder|Staffinfo query()
- * @method static \Illuminate\Database\Eloquent\Builder|Staffinfo whereAddress($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Staffinfo whereBirthDay($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Staffinfo whereBsId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Staffinfo whereCellPhone($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Staffinfo whereCheckedinAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Staffinfo whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Staffinfo whereDan($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Staffinfo whereDeletedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Staffinfo whereDistrict($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Staffinfo whereFurigana($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Staffinfo whereGender($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Staffinfo whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Staffinfo whereMemo($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Staffinfo wherePrefecture($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Staffinfo whereRole($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Staffinfo whereTeam($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Staffinfo whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Staffinfo whereUserId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Staffinfo whereUuid($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Staffinfo whereZip($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Staffinfo withTrashed()
- * @method static \Illuminate\Database\Eloquent\Builder|Staffinfo withoutTrashed()
- */
-	class Staffinfo extends \Eloquent {}
-}
-
-namespace App\Models{
-/**
  * App\Models\User
  *
  * @property int $id
@@ -161,7 +103,6 @@ namespace App\Models{
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection<int, \Illuminate\Notifications\DatabaseNotification> $notifications
  * @property-read int|null $notifications_count
- * @property-read \App\Models\Staffinfo|null $staffinfo
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Laravel\Sanctum\PersonalAccessToken> $tokens
  * @property-read int|null $tokens_count
  * @method static \Database\Factories\UserFactory factory(...$parameters)
