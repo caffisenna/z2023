@@ -26,4 +26,9 @@ class CreateParticipantRequest extends FormRequest
     {
         return Participant::$rules;
     }
+
+    public function messages()
+    {
+        return Participant::$messages;
+    }
 }

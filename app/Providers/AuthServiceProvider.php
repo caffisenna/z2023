@@ -33,10 +33,5 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('staff', function (\App\Models\User $user) {
             return $user->is_staff;
         });
-
-        // 県連
-        Gate::define('pref', function (\App\Models\User $user) {
-            return $user->is_pref;
-        });
     }
 }

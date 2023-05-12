@@ -71,6 +71,9 @@
         null,
         ['class' => 'form-control custom-select'],
     ) !!}
+    @error('pref')
+        <div class="error text-danger">{{ $message }}</div>
+    @enderror
 </div>
 
 <!-- Dan Name Field -->
@@ -172,6 +175,9 @@
         null,
         ['class' => 'form-control custom-select'],
     ) !!}
+    @error('member')
+        <div class="error text-danger">{{ $message }}</div>
+    @enderror
 </div>
 
 <h3 class="uk-text-primary">表彰式</h3>
@@ -338,4 +344,3 @@
     {!! Form::label('staff_memo', 'スタッフメモ:') !!}
     {!! Form::textarea('staff_memo', null, ['class' => 'form-control']) !!}
 </div>
-

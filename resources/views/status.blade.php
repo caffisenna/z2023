@@ -51,14 +51,19 @@
                     <p class="uk-text-large">チェックイン状況</p>
                     <table class="uk-table uk-table-divider uk-table-striped uk-table-hover">
                         <tr>
-                            <th>カテゴリ</th>
-                            <th>人数</th>
+                            <th>県連</th>
+                            <th>全体会</th>
+                            <th>交歓会</th>
                         </tr>
                         @foreach ($participants as $participant)
                             <tr>
-                                <td class="uk-text-default">{{ $participant['name'] }}</td>
-                                <td><span class="uk-text-success">{{ $participant['checked_in'] }}</span> /
-                                    {{ $participant['count'] }}</td>
+                                <td>{{ $participant->pref }}</td>
+                                <td><span class="uk-text-success">{{ $participant->ceremony_checkedin_count }}</span> /
+                                    {{ $participant->ceremony_yes_count }}</td>
+                                <td><span class="uk-text-success">{{ $participant->reception_checkedin_count }}</span>
+                                    /
+                                    {{ $participant->reception_yes_count }}</td>
+
                             </tr>
                         @endforeach
                     </table>

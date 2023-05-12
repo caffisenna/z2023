@@ -24,7 +24,7 @@ class CreateParticipantsTable extends Migration
             $table->string('ceremony')->nullable();             // 表彰式
             $table->string('ceremony_with')->nullable();        // 表彰式同伴者
             $table->string('member');                           // 加盟員 or not
-            $table->string('pref');                             // 県連
+            $table->string('pref')->nullable();                 // 県連
             $table->string('dan')->nullable();                  // 団
             $table->string('role_dan')->nullable();             // 役務
             $table->string('role_district')->nullable();        // 地区役務
@@ -39,8 +39,8 @@ class CreateParticipantsTable extends Migration
             $table->string('memo')->nullable();                 // 連絡事項
             $table->text('staff_memo')->nullable();             // スタッフメモ
             $table->string('uuid')->nullable();                 // uuid
-            $table->boolean('absent_ceremony');                 // 全体会欠席
-            $table->boolean('absent_reception');                // 交歓会欠席
+            $table->boolean('absent_ceremony')->nullable();     // 全体会欠席
+            $table->boolean('absent_reception')->nullable();    // 交歓会欠席
             $table->dateTime('updated_at');
             $table->dateTime('checkedin_at')->nullable();       // チェックイン
             $table->dateTime('reception_checkedin_at')->nullable(); // 交歓会チェックイン

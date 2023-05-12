@@ -214,7 +214,7 @@ class ParticipantController extends AppBaseController
 
     public function absent_list(Request $request)
     {
-        $participants = Participant::where('self_absent', '<>', NULL)
+        $participants = Participant::where('absent_ceremony', 1)
             ->paginate(100);
 
         return view('participants.absent_list')
@@ -224,7 +224,7 @@ class ParticipantController extends AppBaseController
     public function reception_absent_list(Request $request)
     {
         // レセプション欠席リスト
-        $participants = Participant::where('reception_self_absent', '<>', NULL)
+        $participants = Participant::where('absent_reception', 1)
             ->paginate(100);
 
         return view('participants.reception_absent_list')
@@ -335,44 +335,6 @@ class ParticipantController extends AppBaseController
             ->get();
 
         return view('participants.fee_check')
-            ->with('participants', $participants);
-    }
-
-    public function seat_number(Request $request)
-    {
-        $input = $request->all();
-        if (isset($input['row'])) {
-            $participants = Participant::where('seat_number', 'LIKE', $input['row'] . '%')
-                ->where('self_absent',  NULL)
-                ->orderBy('seat_number')
-                ->get();
-        } else {
-            $participants = Participant::where('seat_number', '<>', null)
-                ->where('self_absent',  NULL)
-                ->orderBy('seat_number')
-                ->get();
-        }
-
-        return view('participants.seat_number')
-            ->with('participants', $participants);
-    }
-
-    public function reception_seat_number(Request $request)
-    {
-        $input = $request->all();
-        if (isset($input['table'])) {
-            $participants = Participant::where('reception_seat_number', 'LIKE', $input['table'] . '-%')
-                ->where('reception_self_absent',  NULL)
-                ->orderBy('reception_seat_number')
-                ->get();
-        } else {
-            $participants = Participant::where('reception_seat_number', '<>', null)
-                ->where('self_absent',  NULL)
-                ->orderBy('reception_seat_number')
-                ->get();
-        }
-
-        return view('participants.reception_seat_number')
             ->with('participants', $participants);
     }
 

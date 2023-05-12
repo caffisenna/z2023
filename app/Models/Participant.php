@@ -114,13 +114,12 @@ class Participant extends Model
     public static $rules = [
         'name' => 'required',
         'furigana' => 'required',
-        // 'email' => 'nullable | required_unless:category,県連代表(5),県連代表(6)', // nullを許容してVS,BS以外は必須に
+        'member' => 'required',
     ];
 
     public static $messages = [
         'name.required' => '氏名を入力して下さい',
         'furigana.required' => 'ふりがなを入力して下さい',
-        // 'pref.required' => '県連盟を入力して下さい',
-        // 'email.required_unless' => 'emailを入力して下さい',
+        'member.required' => '加盟員/一般 を選択してください',
     ];
 }
