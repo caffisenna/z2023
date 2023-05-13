@@ -150,7 +150,7 @@
 
     <footer class="main-footer" style="background-color:#115740; color:#fff">
         <p class="uk-text-small uk-text-center"><a href="{{ url('/login') }}"
-                style="color: #FFF">{{ config('app.name') }}</a> &copy;</p>
+                style="color: #FFF">{{ config('app.name') }}</a> &copy;1</p>
     </footer>
 </body>
 
