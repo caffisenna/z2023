@@ -19,9 +19,10 @@
         </p>
     </div>
     <div class="uk-container uk-container-large">
+        <div class="uk-text-center">
+            <img src="{{ url('/images/logo-sp.png') }}" alt="">
+        </div>
 
-        {{-- <button class="uk-button uk-button-primary uk-button-large uk-align-center uk-margin-large-top"
-            onclick="location.href='{{ url('/login') }}'"><span uk-icon="sign-in"></span>ログイン</button> --}}
         <h2>表彰式</h2>
         <p class="uk-text-warning">記念式典の詳細につきましてはご案内のメールをご参照下さい。</p>
         <h3>デジタルパスの使用方法</h3>
