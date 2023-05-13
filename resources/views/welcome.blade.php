@@ -19,7 +19,7 @@
         </p>
     </div>
     <div class="uk-container uk-container-large">
-        <div class="uk-text-center">
+        <div class="uk-text-center uk-margin-top">
             <img src="{{ url('/images/logo-sp.png') }}" alt="">
         </div>
 
