@@ -149,8 +149,8 @@
     </div>
 
     <footer class="main-footer" style="background-color:#115740; color:#fff">
-        <p class="uk-text-small uk-text-center"><a href="{{ url('/login') }}" style="color: #FFF">{{ config('app.name') }}</a><br>
-            受付システム &copy;</p>
+        <p class="uk-text-small uk-text-center"><a href="{{ url('/login') }}"
+                style="color: #FFF">{{ config('app.name') }}</a> &copy;</p>
     </footer>
 </body>
 
