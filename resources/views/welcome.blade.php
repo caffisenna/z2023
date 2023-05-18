@@ -149,8 +149,8 @@
     </div>
 
     <footer class="main-footer" style="background-color:#115740; color:#fff">
-        <p class="uk-text-small uk-text-center"><a href="{{ url('/login') }}"
-                style="color: #FFF">{{ config('app.name') }}</a> &copy;</p>
+        <p class="uk-text-small uk-text-center">{{ config('app.name') }} <a href="{{ url('/login') }}"
+                style="color: #FFF">&copy;</a></p>
     </footer>
 </body>
 

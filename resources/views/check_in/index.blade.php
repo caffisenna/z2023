@@ -46,11 +46,17 @@
                                     <td>氏名</td>
                                     <td>{{ $participant->name }} 様</td>
                                 </tr>
-                                @if(isset($participant->ceremony))
-                                <tr>
-                                    <td>表彰</td>
-                                    <td><span class="uk-text-danger">表彰参加者</span></td>
-                                </tr>
+                                @if (isset($participant->ceremony))
+                                    <tr>
+                                        <td>表彰</td>
+                                        <td><span class="uk-text-danger">表彰参加者</span></td>
+                                    </tr>
+                                @endif
+                                @if (isset($participant->reception_table))
+                                    <tr>
+                                        <td>交歓会テーブル</td>
+                                        <td>{{ $participant->reception_table }}</td>
+                                    </tr>
                                 @endif
                                 <tr>
                                     <td>所属</td>

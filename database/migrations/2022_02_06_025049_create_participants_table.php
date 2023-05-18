@@ -41,6 +41,7 @@ class CreateParticipantsTable extends Migration
             $table->string('uuid')->nullable();                 // uuid
             $table->boolean('absent_ceremony')->nullable();     // 全体会欠席
             $table->boolean('absent_reception')->nullable();    // 交歓会欠席
+            $table->string('reception_table', 20)->nullable();      // 交歓会テーブル指定
             $table->dateTime('updated_at');
             $table->dateTime('checkedin_at')->nullable();       // チェックイン
             $table->dateTime('reception_checkedin_at')->nullable(); // 交歓会チェックイン
