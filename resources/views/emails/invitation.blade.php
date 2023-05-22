@@ -18,8 +18,8 @@ https://rsvp-z2023.scout.or.jp/mypage?id={{ $user->uuid }}<br>
 ・記念品は受付の際にお渡しいたします。<br>
 ・交歓会へのご参加も同じ２次元バーコードで受付いたします。<br>
 <br>
-全国大会の詳しい内容や、デジタルパスの詳しい使用方法等は添付資料に記載しておりますので、<br>
-ご確認のほどお願いいたします。<br>
+全国大会の詳しい内容や、デジタルパスの詳しい使用方法等は下記のURLをご確認いただければ幸いです。<br>
+https://drive.google.com/file/d/1mJ-c-2gGHWKfPVgx92CK6UK0cOrBb8p2/view?usp=share_link<br>
 当日皆様にお会いできることを心よりお待ちしております。<br>
 
 <br>
