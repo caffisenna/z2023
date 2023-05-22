@@ -34,6 +34,9 @@
             <li>記念品は受付の際にお渡しいたします。</li>
             <li>交歓会へのご参加も同じ２次元バーコードで受付いたします。</li>
         </ul>
+
+        2023年度全国大会の総合案内は以下のページをご参照下さい。<br>
+        <a href="https://www.scout.or.jp/member/zenkokutaikai2023/">2023（令和5）年度 全国大会 - ボーイスカウト日本連盟｜加盟員向け情報</a>
     </div>
 
     <div uk-sticky="position: bottom" style="background-color:#115740; color:#fff">
