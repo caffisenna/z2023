@@ -271,7 +271,7 @@ class ParticipantController extends AppBaseController
                 // ここでカテゴリ & 参加タイプで切り分けないとだめ
                 Mail::to($sendto)->queue(new InvitationSend($participant));
             }
-            $participant->email_sent_at = now();
+            // $participant->email_sent_at = now();
             $participant->save();
             Flash::success($participant->name . '様へデジタルパスを送信しました');
         }
@@ -298,7 +298,7 @@ class ParticipantController extends AppBaseController
                 if (isset($participant->email)) {
                     $sendto = ['email' => $participant->email];
                     Mail::to($sendto)->queue(new InvitationSend($participant));
-                    $participant->email_sent_at = now();
+                    // $participant->email_sent_at = now();
                     $participant->save();
                 }
             }

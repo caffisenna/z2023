@@ -58,13 +58,23 @@
                     {!! QrCode::size(150)->generate(url('/s/check_in?id=') . $participant->uuid) !!}
                 </div>
             </div>
+            @if (ENV('CHECKIN_ACCEPT_TIME') < now())
+                @if (ENV('RECEPTION_ACCEPT_TIME') > now())
+                    <p class="uk-text-center">↓↓現在<span class="uk-text-danger">全体会</span>のチェックイン中↓↓</p>
+                @else
+                    <p class="uk-text-center">↓↓現在<span class="uk-text-danger">交歓会</span>のチェックイン中↓↓</p>
+                @endif
 
-            <div class="uk-text-center uk-margin">
-                {!! Form::open(['route' => 'self_checkin', 'method' => 'POST']) !!}
-                {!! Form::hidden('uuid', $participant->uuid, null) !!}
-                {!! Form::submit('セルフチェックイン', ['class' => 'uk-button uk-button-primary uk-button-large']) !!}
-                {!! Form::close() !!}
-            </div>
+                <div class="uk-text-center uk-margin">
+                    {!! Form::open(['route' => 'self_checkin', 'method' => 'POST']) !!}
+                    {!! Form::hidden('uuid', $participant->uuid, null) !!}
+                    {!! Form::submit('セルフチェックイン', ['class' => 'uk-button uk-button-primary uk-button-large']) !!}
+                    {!! Form::close() !!}
+                </div>
+            @else
+                <p class="uk-text-center">セルフチェックインは<br><span
+                        class="uk-text-danger">{{ ENV('CHECKIN_ACCEPT_TIME') }}</span>から可能です</p>
+            @endif
         </div>
         <div uk-sticky="position: bottom" style="background-color:#115740; color:#fff">
             <p class="uk-text-small uk-text-center">

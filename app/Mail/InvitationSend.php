@@ -30,13 +30,14 @@ class InvitationSend extends Mailable
      */
     public function build()
     {
-        if(isset($this->user->seat_number) && isset($this->user->reception_seat_number)){
-            $subject = 'ボーイスカウト日本連盟100周年記念式典・レセプションのご案内';
-        }elseif(isset($this->user->seat_number) && empty($this->user->reception_seat_number)){
-            $subject = 'ボーイスカウト日本連盟100周年記念式典のご案内';
-        }elseif(empty($this->user->seat_number) && isset($this->user->reception_seat_number)){
-            $subject = 'ボーイスカウト日本連盟100周年レセプションのご案内';
-        }
+        // if(isset($this->user->seat_number) && isset($this->user->reception_seat_number)){
+        //     $subject = 'ボーイスカウト日本連盟100周年記念式典・レセプションのご案内';
+        // }elseif(isset($this->user->seat_number) && empty($this->user->reception_seat_number)){
+        //     $subject = 'ボーイスカウト日本連盟100周年記念式典のご案内';
+        // }elseif(empty($this->user->seat_number) && isset($this->user->reception_seat_number)){
+        //     $subject = 'ボーイスカウト日本連盟100周年レセプションのご案内';
+        // }
+        $subject = '【重要】２０２３年度全国大会へご参加の皆様へ';
 
         return $this->view('emails.invitation')
             ->subject($subject)

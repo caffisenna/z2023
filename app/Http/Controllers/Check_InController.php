@@ -73,8 +73,15 @@ class Check_InController extends AppBaseController
         $uuid = $request['checkin_id'];
 
         // 対象取得(未チェックインを抽出)
-        $person = Participant::where('uuid', $uuid)->where('checkedin_at', null)->firstorfail();
-        $person->checkedin_at = now();  // 指導者
+        if (ENV('RECEPTION_ACCEPT_TIME') > now()) {
+            $person = Participant::where('uuid', $uuid)->where('checkedin_at', null)->firstorfail();
+            $person->checkedin_at = now();
+        } else {
+            $person = Participant::where('uuid', $uuid)->where('reception_checkedin_at', null)->firstorfail();
+            $person->reception_checkedin_at = now();
+        }
+
+        // 保存
         $person->save();
 
         Flash::success($person->name . 'さんのチェックイン処理をしました');
@@ -116,25 +123,25 @@ class Check_InController extends AppBaseController
 
         $participants = Participant::where('name', '')->get();
         $order = [
-                '北海道', '青森', '岩手', '宮城', '秋田', '山形', '福島',
-                '茨城', '栃木', '群馬', '埼玉', '千葉', '東京', '神奈川', '新潟', '富山',
-                '石川', '福井', '山梨', '長野', '岐阜', '静岡', '愛知', '三重', '滋賀',
-                '京都', '大阪', '兵庫', '奈良', '和歌山', '鳥取', '島根', '岡山', '広島',
-                '山口', '徳島', '香川', '愛媛', '高知', '福岡', '佐賀', '長崎', '熊本',
-                '大分', '宮崎', '鹿児島', '沖縄', '荻窪', '日本', '日本連盟',
-            ]; // 県連の順番でソートさせるための配列
+            '北海道', '青森', '岩手', '宮城', '秋田', '山形', '福島',
+            '茨城', '栃木', '群馬', '埼玉', '千葉', '東京', '神奈川', '新潟', '富山',
+            '石川', '福井', '山梨', '長野', '岐阜', '静岡', '愛知', '三重', '滋賀',
+            '京都', '大阪', '兵庫', '奈良', '和歌山', '鳥取', '島根', '岡山', '広島',
+            '山口', '徳島', '香川', '愛媛', '高知', '福岡', '佐賀', '長崎', '熊本',
+            '大分', '宮崎', '鹿児島', '沖縄', '荻窪', '日本', '日本連盟',
+        ]; // 県連の順番でソートさせるための配列
 
-            // カウント
-            $participants = Participant::select(
-                'pref',
-                \DB::raw('SUM(CASE WHEN name IS NOT NULL THEN 1 ELSE 0 END) as ceremony_yes_count'),
-                \DB::raw('SUM(CASE WHEN checkedin_at IS NOT NULL THEN 1 ELSE 0 END) as ceremony_checkedin_count'), // チェックイン済み
-                \DB::raw('SUM(CASE WHEN reception = "参加する" THEN 1 ELSE 0 END) as reception_yes_count'),
-                \DB::raw('SUM(CASE WHEN reception_checkedin_at IS NOT NULL THEN 1 ELSE 0 END) as reception_checkedin_count'), // チェックイン済み
-            )
-                ->groupby('pref')
-                ->orderBy(\DB::raw('FIELD(pref, "' . implode('","', $order) . '")')) // 県連でソート
-                ->get();
+        // カウント
+        $participants = Participant::select(
+            'pref',
+            \DB::raw('SUM(CASE WHEN name IS NOT NULL THEN 1 ELSE 0 END) as ceremony_yes_count'),
+            \DB::raw('SUM(CASE WHEN checkedin_at IS NOT NULL THEN 1 ELSE 0 END) as ceremony_checkedin_count'), // チェックイン済み
+            \DB::raw('SUM(CASE WHEN reception = "参加する" THEN 1 ELSE 0 END) as reception_yes_count'),
+            \DB::raw('SUM(CASE WHEN reception_checkedin_at IS NOT NULL THEN 1 ELSE 0 END) as reception_checkedin_count'), // チェックイン済み
+        )
+            ->groupby('pref')
+            ->orderBy(\DB::raw('FIELD(pref, "' . implode('","', $order) . '")')) // 県連でソート
+            ->get();
 
         return view('status')->with('participants', $participants);
     }
