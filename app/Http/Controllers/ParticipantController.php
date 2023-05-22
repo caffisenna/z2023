@@ -317,6 +317,22 @@ class ParticipantController extends AppBaseController
         return view('participants.sendmail_pref')->with('prefs', $prefs);
     }
 
+    public function re_send()
+    // 再送
+    {
+        $emails = array(
+            'tadano@scout.or.jp',
+            'taichi.tadano@gmail.com',
+            'caffi.senna@gmail.com',
+        );
+
+        foreach ($emails as $email) {
+            $participant = Participant::where('email', $email)->first();
+            $sendto = ['email' => $participant->email];
+            Mail::to($sendto)->queue(new InvitationSend($participant));
+        }
+    }
+
 
     public function fee_check(Request $request)
     {

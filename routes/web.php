@@ -40,6 +40,7 @@ Route::prefix('admin')->middleware('can:admin')->group(function () {
     Route::post('/cancel', [App\Http\Controllers\AdminCancelController::class, 'index'])->name('cancel'); // キャンセルリスト検索
     Route::get('/sendmail', [App\Http\Controllers\ParticipantController::class, 'sendmail'])->name('sendmail'); // 招待状送信
     Route::get('/sendmail_pref', [App\Http\Controllers\ParticipantController::class, 'sendmail_pref'])->name('sendmail_pref'); // 招待状送信(県連単位)
+    Route::get('/re_send', [App\Http\Controllers\ParticipantController::class, 're_send'])->name('re_send'); // エラー再送
     Route::get('/fee_check', [App\Http\Controllers\ParticipantController::class, 'fee_check'])->name('fee_check'); // 参加費チェック
     Route::get('/absent/', [App\Http\Controllers\ParticipantController::class, 'absent'])->name('absent'); // キャンセル入力
     Route::resource('addUsers', App\Http\Controllers\add_userController::class);
