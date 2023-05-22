@@ -295,7 +295,7 @@ class ParticipantController extends AppBaseController
             foreach ($participants as $participant) { // 個別にメール送信をループ
                 // まず対象レコードがメアドを持っているか確認する!
                 // 持っていなければスキップしないとシステムが死ぬ!!!
-                if (isset($participant->email)) {
+                if ($participant->email <> '') {
                     $sendto = ['email' => $participant->email];
                     Mail::to($sendto)->queue(new InvitationSend($participant));
                     // $participant->email_sent_at = now();
