@@ -95,7 +95,7 @@
                                 <th>氏名</th>
                                 <th>県連</th>
                                 <th>所属</th>
-                                <th>役務</th>
+                                <th>email</th>
                                 <th>操作</th>
                             </tr>
                         </thead>
@@ -109,7 +109,7 @@
                                     <td>{{ $participant->district }}
                                         {{ $participant->dan }}{{ $participant->dan_number }}
                                     </td>
-                                    <td>{{ $participant->role }}</td>
+                                    <td>{{ $participant->email }}</td>
                                     <td>
                                         <div class='btn-group'>
                                             <a href="{{ url('/admin/sendmail') . "/?uuid=$participant->uuid" }}"
