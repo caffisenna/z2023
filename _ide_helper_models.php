@@ -42,6 +42,9 @@ namespace App\Models{
  * @property string|null $staff_memo
  * @property int|null $absent_ceremony
  * @property bool|null $absent_reception
+ * @property string|null $reception_table
+ * @property string|null $checkin_type_ceremony
+ * @property string|null $checkin_type_reception
  * @property \Illuminate\Support\Carbon $updated_at
  * @property string|null $checkedin_at
  * @property string|null $reception_checkedin_at
@@ -56,6 +59,8 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Participant whereCeremony($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Participant whereCeremonyWith($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Participant whereCheckedinAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Participant whereCheckinTypeCeremony($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Participant whereCheckinTypeReception($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Participant whereCongress($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Participant whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Participant whereDan($value)
@@ -73,6 +78,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Participant whereReason($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Participant whereReception($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Participant whereReceptionCheckedinAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Participant whereReceptionTable($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Participant whereRoleCouncil($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Participant whereRoleDan($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Participant whereRoleDistrict($value)
