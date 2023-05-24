@@ -67,6 +67,7 @@ class add_userController extends AppBaseController
         // 権限
         if ($input['role'] == '管理者') {
             $input['is_admin'] = 1;
+            $input['is_staff'] = 1;
         } elseif ($input['role'] == 'スタッフ') {
             $input['is_staff'] = 1;
         }
