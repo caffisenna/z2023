@@ -219,6 +219,11 @@
     ) !!}
 </div>
 
+<div class="form-group col-sm-6">
+    {!! Form::label('reception_table', '交歓会テーブル:') !!}
+    {!! Form::text('reception_table', null, ['class' => 'form-control']) !!}
+</div>
+
 <h3 class="uk-text-primary">参加会議</h3>
 
 <div class="form-group col-sm-6">

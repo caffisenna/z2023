@@ -9,7 +9,7 @@
     </tr>
     <tr>
         <th>交歓会</th>
-        <td>{{ $participant->reception }}</td>
+        <td>{{ $participant->reception }} (テーブル:{{ $participant->reception_table }})</td>
     </tr>
     <tr>
         <th>参加会議</th>
