@@ -31,9 +31,20 @@ class Check_InController extends AppBaseController
         if (isset($request->id)) {
             // カメラスキャンでQR読み取った時 (id に uuidが入る)
             $participant = Participant::where('uuid', $request->id)->firstorfail();
-            $participant->checkedin_at = now();
+            // ここで時刻分岐
+            if (
+                // 全体会
+                now()->between(env('CEREMONY1_ACCEPT_START'), env('CEREMONY1_ACCEPT_END')) ||
+                now()->between(env('CEREMONY2_ACCEPT_START'), env('CEREMONY2_ACCEPT_END'))
+            ) {
+                $participant->checkedin_at = now();
+            }
+            if (now()->between(env('RECEPTION_ACCEPT_START'), env('RECEPTION_ACCEPT_END'))) {
+                // 交歓会
+                $participant->reception_checkedin_at = now();
+            }
 
-            // 本人、もしくは引率指導者のチェックイン
+            // データ保存して前画面へリダイレクト
             $participant->save();
             return view('check_in.index')
                 ->with('participant', $participant);
@@ -88,9 +99,9 @@ class Check_InController extends AppBaseController
     {
         $uuid = $request['checkin_id'];
 
-        if(now()->between(env('CEREMONY1_ACCEPT_START'),env('CEREMONY2_ACCEPT_START'))){
+        if (now()->between(env('CEREMONY1_ACCEPT_START'), env('CEREMONY2_ACCEPT_START'))) {
             dd('true');
-        }else{
+        } else {
             dd('false');
         }
 
