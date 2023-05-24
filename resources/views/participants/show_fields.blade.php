@@ -71,31 +71,31 @@
         <th>申込日</th>
         <td>{{ $participant->created_at }}</td>
     </tr>
-    @if ($participant->ceremony)
-        <tr>
-            <th>全体会欠席処理</th>
-            <td>
-                @if ($participant->absent_ceremony == 0)
-                    <a href="{{ url('/admin/absent/') }}/?q=ceremony&uuid={{ $participant->uuid }}"
-                        class="uk-button uk-button-danger"
-                        onclick="return confirm('{{ $participant->name }}さんの全体会の欠席処理をしますか?')">全体会欠席</a>
-                @else
-                    <span class="uk-text-danger">欠席入力済み</span>
-                    <a href="{{ url('/admin/absent/') }}/?q=cancel_ceremony&uuid={{ $participant->uuid }}"
-                        class="uk-button uk-button-primary"
-                        onclick="return confirm('{{ $participant->name }}さんの全体会の欠席を取り消しますか?')">欠席取消</a>
-                @endif
-            </td>
-        </tr>
-    @endif
+
+    <tr>
+        <th>全体会欠席処理</th>
+        <td>
+            @if (empty($participant->absent_ceremony))
+                <a href="{{ url('/admin/absent/') }}/?q=ceremony&uuid={{ $participant->uuid }}"
+                    class="uk-button uk-button-danger"
+                    onclick="return confirm('{{ $participant->name }}さんの全体会の欠席処理をしますか?')">全体会欠席</a>
+            @else
+                <span class="uk-text-danger">欠席入力済み</span>
+                <a href="{{ url('/admin/absent/') }}/?q=cancel_ceremony&uuid={{ $participant->uuid }}"
+                    class="uk-button uk-button-primary"
+                    onclick="return confirm('{{ $participant->name }}さんの全体会の欠席を取り消しますか?')">欠席取消</a>
+            @endif
+        </td>
+    </tr>
+
     @if ($participant->reception)
         <tr>
             <th>交歓会欠席処理</th>
             <td>
-                @if ($participant->absent_reception == 0)
+                @if (empty($participant->absent_reception))
                     <a href="{{ url('/admin/absent/') }}/?q=reception&uuid={{ $participant->uuid }}"
                         class="uk-button uk-button-danger"
-                        onclick="return confirm('{{ $participant->name }}さんの交歓会の欠席処理をしますか?')">全体会欠席</a>
+                        onclick="return confirm('{{ $participant->name }}さんの交歓会の欠席処理をしますか?')">交歓会欠席</a>
                 @else
                     <span class="uk-text-danger">欠席入力済み</span>
                     <a href="{{ url('/admin/absent/') }}/?q=cancel_reception&uuid={{ $participant->uuid }}"

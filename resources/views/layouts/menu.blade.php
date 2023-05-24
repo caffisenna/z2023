@@ -14,7 +14,13 @@
     <li class="nav-item">
         <a href="{{ url('/admin/not_checked_in') }}"
             class="nav-link {{ Request::is('*admin/not_checked_in') ? 'active' : '' }}">
-            <p>未チェックイン</p>
+            <p>未チェックイン(全体会)</p>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a href="{{ url('/admin/reception_not_checked_in') }}"
+            class="nav-link {{ Request::is('*admin/reception_not_checked_in') ? 'active' : '' }}">
+            <p>未チェックイン(交歓会)</p>
         </a>
     </li>
     <li class="nav-item">

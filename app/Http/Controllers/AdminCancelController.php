@@ -49,6 +49,8 @@ class AdminCancelController extends AppBaseController
         } else { // 何もリクエストがないとき
             $participants = Participant::where('checkedin_at', '<>', NULL)
                 ->orwhere('reception_checkedin_at', '<>', NULL)
+                ->orwhere('absent_ceremony', '<>', NULL)
+                ->orwhere('absent_reception', '<>', NULL)
                 ->orderby('id', 'asc')->get();
 
             // $participant->save();

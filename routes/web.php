@@ -32,6 +32,7 @@ Route::prefix('admin')->middleware('can:admin')->group(function () {
     Route::resource('participants', App\Http\Controllers\ParticipantController::class);
     Route::get('/checked_in', [App\Http\Controllers\ParticipantController::class, 'checked_in'])->name('checked_in'); // チェックイン済みリスト
     Route::get('/not_checked_in', [App\Http\Controllers\ParticipantController::class, 'not_checked_in'])->name('not_checked_in'); // 未チェックイン済みリスト
+    Route::get('/reception_not_checked_in', [App\Http\Controllers\ParticipantController::class, 'reception_not_checked_in'])->name('reception_not_checked_in'); // 未チェックイン済みリスト
     Route::get('/absent_list', [App\Http\Controllers\ParticipantController::class, 'absent_list'])->name('absent_list'); // 欠席入力リスト
     Route::get('/reception_absent_list', [App\Http\Controllers\ParticipantController::class, 'reception_absent_list'])->name('reception_absent_list'); // 欠席入力リスト
     Route::get('/cancel_check_in/', [App\Http\Controllers\ParticipantController::class, 'cancel_check_in'])->name('cancel_check_in'); // チェックインキャンセル

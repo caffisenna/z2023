@@ -184,7 +184,7 @@ class ParticipantController extends AppBaseController
 
     public function checked_in(Request $request)
     {
-        $participants = Participant::where('checkedin_at', '<>', NULL)
+        $participants = Participant::where('checkedin_at', '<>', NULL)->orwhere('reception_checkedin_at', '<>', NULL)
             ->paginate(100);
 
         return view('participants.checked_in')
@@ -254,8 +254,15 @@ class ParticipantController extends AppBaseController
 
     public function not_checked_in(Request $request)
     {
-        $participants = Participant::where('checkedin_at', NULL)
-            ->paginate(100);
+        $participants = Participant::where('checkedin_at', NULL)->paginate(900);
+
+        return view('participants.checked_in')
+            ->with('participants', $participants);
+    }
+
+    public function reception_not_checked_in(Request $request)
+    {
+        $participants = Participant::where('reception', '参加する')->where('reception_checkedin_at', NULL)->paginate(500);
 
         return view('participants.checked_in')
             ->with('participants', $participants);
@@ -331,27 +338,6 @@ class ParticipantController extends AppBaseController
             $sendto = ['email' => $participant->email];
             Mail::to($sendto)->queue(new InvitationSend($participant));
         }
-    }
-
-
-    public function fee_check(Request $request)
-    {
-        $input = $request->all();
-
-        // uuidがあればDBから検索して入金確認日をチェック
-        if (isset($input['uuid'])) {
-            $participant = Participant::where('uuid', $input['uuid'])->first();
-            $participant->fee_checked_at = now();
-            $participant->save();
-            Flash::success($participant->name . '様の入金チェックを行いました。');
-        }
-
-        $participants = Participant::where('reception_seat_number', '<>', null)
-            ->where('fee_checked_at', null)
-            ->get();
-
-        return view('participants.fee_check')
-            ->with('participants', $participants);
     }
 
     public function absent(Request $request)

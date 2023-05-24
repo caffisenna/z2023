@@ -54,12 +54,28 @@ class Check_InController extends AppBaseController
 
         // 手入力チェックインの場合
         if (isset($request->uuid)) {
-            $participant = Participant::where('uuid', $request->uuid)->firstorfail();
-            $participant->checkedin_at = now();
-            $participant->save();
+            $uuid = $request->uuid;
+            if (
+                now()->between(env('CEREMONY1_ACCEPT_START'), env('CEREMONY1_ACCEPT_END')) ||
+                now()->between(env('CEREMONY2_ACCEPT_START'), env('CEREMONY2_ACCEPT_END'))
+            ) {
+                $participant = Participant::where('uuid', $uuid)->where('checkedin_at', null)->firstorfail();
+                $participant->checkedin_at = now();
+                $participant->checkin_type_ceremony = 'self';
+                $participant->save();
+                Flash::success($participant->name . "さんのチェックイン完了");
+            }
+            // 交歓会
+            if (now()->between(env('RECEPTION_ACCEPT_START'), env('RECEPTION_ACCEPT_END'))) {
+                $participant = Participant::where('uuid', $uuid)->where('reception_checkedin_at', null)->firstorfail();
+                $participant->reception_checkedin_at = now();
+                $participant->checkin_type_reception = 'self';
+                $participant->save();
+                Flash::success($participant->name . "さんのチェックイン完了");
+            }
 
             Flash::success($participant->name . "さんのチェックイン完了");
-            // return view('check_in.input')->with('participant', $participant);
+
             return view('check_in.index')
                 ->with('participant', $participant);
         }
@@ -72,13 +88,22 @@ class Check_InController extends AppBaseController
     {
         $uuid = $request['checkin_id'];
 
-        // 対象取得(未チェックインを抽出)
-        if (ENV('RECEPTION_ACCEPT_TIME') > now()) {
+        if(now()->between(env('CEREMONY1_ACCEPT_START'),env('CEREMONY2_ACCEPT_START'))){
+            dd('true');
+        }else{
+            dd('false');
+        }
+
+        if ((env('CEREMONY1_ACCEPT_START') < now() && env('CEREMONY1_ACCEPT_END') > now()) ||
+            (env('CEREMONY2_ACCEPT_START') < now() && env('CEREMONY2_ACCEPT_END') > now())
+        ) {
             $person = Participant::where('uuid', $uuid)->where('checkedin_at', null)->firstorfail();
             $person->checkedin_at = now();
-        } else {
+            $person->checkin_type_ceremony = 'self';
+        } elseif ((env('RECEPTION_ACCEPT_START') < now() && env('RECEPTION_ACCEPT_END') > now())) {
             $person = Participant::where('uuid', $uuid)->where('reception_checkedin_at', null)->firstorfail();
             $person->reception_checkedin_at = now();
+            $person->checkin_type_reception = 'self';
         }
 
         // 保存
@@ -90,37 +115,6 @@ class Check_InController extends AppBaseController
 
     public function status()
     {
-        // チェックインのステータス
-        // $prefs = array(
-        //     '北海道', '青森', '岩手', '宮城', '秋田', '山形', '福島',
-        //     '茨城', '栃木', '群馬', '埼玉', '千葉', '東京', '神奈川', '新潟', '富山',
-        //     '石川', '福井', '山梨', '長野', '岐阜', '静岡', '愛知', '三重', '滋賀',
-        //     '京都', '大阪', '兵庫', '奈良', '和歌山', '鳥取', '島根', '岡山', '広島',
-        //     '山口', '徳島', '香川', '愛媛', '高知', '福岡', '佐賀', '長崎', '熊本',
-        //     '大分', '宮崎', '鹿児島', '沖縄', '荻窪','日本連盟',
-        // );
-
-        // foreach ($prefs as $pref) {
-        //     $count = Participant::where('pref', $pref)->where('seat_number', '<>', NULL)
-        //         ->where('self_absent', NULL)
-        //         ->count();
-        //     $checked_in = Participant::where('pref', $pref)->where('checkedin_at', '<>', NULL)
-        //         ->count();
-        //     $arr = array();
-        //     $arr['name'] = $pref;
-        //     $arr['count'] = $count;
-        //     $arr['checked_in'] = $checked_in;
-        //     $participants[] = $arr;
-        // }
-
-        // 全体数
-        // $count = Participant::where('seat_number', '<>', NULL)
-        //     ->where('self_absent', NULL)
-        //     ->count();
-        // $checked_in = Participant::where('checkedin_at', '<>', NULL)
-        //     ->count();
-        // $participants[] = array('name' => 'トータル', 'count' => $count, 'checked_in' => $checked_in);
-
         $participants = Participant::where('name', '')->get();
         $order = [
             '北海道', '青森', '岩手', '宮城', '秋田', '山形', '福島',

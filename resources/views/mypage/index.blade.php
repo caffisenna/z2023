@@ -58,23 +58,39 @@
                     {!! QrCode::size(150)->generate(url('/s/check_in?id=') . $participant->uuid) !!}
                 </div>
             </div>
-            @if (ENV('CHECKIN_ACCEPT_TIME') < now())
-                @if (ENV('RECEPTION_ACCEPT_TIME') > now())
-                    <p class="uk-text-center">↓↓現在<span class="uk-text-danger">全体会</span>のチェックイン中↓↓</p>
-                @else
+
+            @if (now()->between(env('CEREMONY1_ACCEPT_START'), env('CEREMONY1_ACCEPT_END')) ||
+                    now()->between(env('CEREMONY2_ACCEPT_START'), env('CEREMONY2_ACCEPT_END')))
+                <p class="uk-text-center">↓↓現在<span class="uk-text-danger">全体会</span>のチェックイン中↓↓</p>
+            @elseif(now()->between(env('RECEPTION_ACCEPT_START'), env('RECEPTION_ACCEPT_END')))
+                @if ($participant->reception == '参加する')
                     <p class="uk-text-center">↓↓現在<span class="uk-text-danger">交歓会</span>のチェックイン中↓↓</p>
                 @endif
+            @else
+                <p class="uk-text-center">【セルフチェックインが可能な時間】</p>
+                <ul class="uk-list uk-text-center uk-text-small">
+                    <li>全体会: 5月28日(土) 00:00〜17:00</li>
+                    <li>交歓会: 5月28日(土) 17:00〜20:00</li>
+                    <li>全体会: 5月29日(日) 00:00〜14:00</li>
+                </ul>
+                <p class="uk-text-small uk-text-warning uk-text-center">各時間帯でデジタルパスを再表示してください</p>
+            @endif
 
+            @if (
+                (now()->between(env('CEREMONY1_ACCEPT_START'), env('CEREMONY1_ACCEPT_END')) ||
+                    now()->between(env('CEREMONY2_ACCEPT_START'), env('CEREMONY2_ACCEPT_END')) ||
+                    now()->between(env('RECEPTION_ACCEPT_START'), env('RECEPTION_ACCEPT_END'))) &&
+                    $participant->reception == '参加する')
                 <div class="uk-text-center uk-margin">
                     {!! Form::open(['route' => 'self_checkin', 'method' => 'POST']) !!}
                     {!! Form::hidden('uuid', $participant->uuid, null) !!}
                     {!! Form::submit('セルフチェックイン', ['class' => 'uk-button uk-button-primary uk-button-large']) !!}
                     {!! Form::close() !!}
                 </div>
-            @else
-                <p class="uk-text-center">セルフチェックインは<br><span
-                        class="uk-text-danger">{{ ENV('CHECKIN_ACCEPT_TIME') }}</span>から可能です</p>
             @endif
+
+
+
         </div>
         <div uk-sticky="position: bottom" style="background-color:#115740; color:#fff">
             <p class="uk-text-small uk-text-center">

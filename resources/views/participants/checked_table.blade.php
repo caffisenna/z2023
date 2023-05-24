@@ -71,29 +71,28 @@
             <tr>
                 <th>氏名</th>
                 <th>県連</th>
-                <th>所属</th>
-                <th>役務</th>
-                <th>座席</th>
+                <th>全体会</th>
+                <th>交歓会</th>
+                <th>交歓会座席</th>
             </tr>
         </thead>
         <tbody>
             @foreach ($participants as $participant)
                 <tr>
                     <td><a href="{{ route('participants.show', [$participant->id]) }}">{{ $participant->name }}</a>
-                        <span class="uk-text-warning">
-                            @if (isset($participant->vs))
-                                <br>VS:{{ $participant->vs->name }}
-                            @endif
-                            @if (isset($participant->bs))
-                                <br>BS:{{ $participant->bs->name }}
-                            @endif
-                        </span>
                     </td>
                     <td>{{ $participant->pref }}</td>
-                    <td>{{ $participant->district }} {{ $participant->dan }}{{ $participant->dan_number }}
+                    <td>
+                        @if ($participant->checkedin_at)
+                            〇
+                        @endif
                     </td>
-                    <td>{{ $participant->role }}</td>
-                    <td>{{ $participant->seat_number }}</td>
+                    <td>
+                        @if ($participant->reception_checkedin_at)
+                            〇
+                        @endif
+                    </td>
+                    <td>{{ $participant->reception_table }}</td>
                 </tr>
             @endforeach
         </tbody>

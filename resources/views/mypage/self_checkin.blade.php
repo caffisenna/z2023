@@ -29,15 +29,20 @@
         <div class="uk-margin uk-text-center">
             <img src="{{ url('/images/logo-sp.png') }}" width="150px">
             <p class="uk-text-large uk-text-center uk-text-primary">セルフチェックイン</p>
-            @if (ENV('RECEPTION_ACCEPT_TIME') > now() && empty($participant->checkedin_at))
+            @if (env('CEREMONY1_ACCEPT_START') < now() && env('CEREMONY1_ACCEPT_END') > now() && empty($participant->checkedin_at))
                 <p class="uk-text-center">↓↓現在<span class="uk-text-danger">全体会</span>のチェックイン中↓↓</p>
-            @elseif (ENV('RECEPTION_ACCEPT_TIME') < now() && empty($participant->reception_checkedin_at))
+            @elseif (env('CEREMONY2_ACCEPT_START') < now() && env('CEREMONY2_ACCEPT_END') > now() && empty($participant->checkedin_at))
+                <p class="uk-text-center">↓↓現在<span class="uk-text-danger">全体会</span>のチェックイン中↓↓</p>
+            @elseif (env('RECEPTION_ACCEPT_START') < now() &&
+                    env('RECEPTION_ACCEPT_END') > now() &&
+                    empty($participant->reception_checkedin_at))
                 <p class="uk-text-center">↓↓現在<span class="uk-text-danger">交歓会</span>のチェックイン中↓↓</p>
             @endif
         </div>
-        @if (env('CHECKIN_ACCEPT_TIME') < now())
-            @if (empty($participant->checkedin_at) ||
-                    ($participant->reception == '参加する' && empty($participant->reception_checkedin_at)))
+        @if (
+            (env('CEREMONY1_ACCEPT_START') < now() && env('CEREMONY1_ACCEPT_END') > now()) ||
+                (env('CEREMONY2_ACCEPT_START') < now() && env('CEREMONY2_ACCEPT_END') > now()))
+            @if (empty($participant->checkedin_at))
                 <div class="card-body p-0">
                     <div class="uk-text-center uk-margin">
                         <div class="uk-text-center uk-margin">
@@ -51,24 +56,48 @@
                         </div>
                     </div>
                 </div>
-            @elseif ($participant->reception !== '参加する')
-                <div class="uk-text-center">
-                    <span class="uk-text-warning">交歓会の申込がありません。<br>スタッフにお問い合わせください。</span>
+            @endif
+        @elseif (env('RECEPTION_ACCEPT_START') < now() && env('RECEPTION_ACCEPT_END') > now())
+            @if (empty($participant->reception_checkedin_at))
+                <div class="card-body p-0">
+                    <div class="uk-text-center uk-margin">
+                        <div class="uk-text-center uk-margin">
+                            {!! Form::open(['route' => 'self_checkin', 'method' => 'POST', 'onsubmit' => 'return beforeSubmit()']) !!}
+                            {!! Form::hidden('uuid', $participant->uuid, null) !!}
+                            {!! Form::hidden('confirm', 'true', null) !!}
+                            {!! Form::submit('チェックインする', [
+                                'class' => 'uk-button uk-button-primary uk-button-large',
+                            ]) !!}
+                            {!! Form::close() !!}
+                        </div>
+                    </div>
                 </div>
             @endif
+        @endif
+        @if (empty($participant->checkedin_at) ||
+                ($participant->reception == '参加する' && empty($participant->reception_checkedin_at)))
+        @elseif ($participant->reception !== '参加する')
+            <div class="uk-text-center">
+                <span class="uk-text-warning">交歓会の申込がありません。<br>スタッフにお問い合わせください。</span>
+            </div>
         @endif
 
 
         <div class="card-body p-0">
             <div class="uk-text-center uk-margin">
-                {{-- 交歓会 --}}
-                @if (env('RECEPTION_ACCEPT_TIME') < now() && $participant->reception_checkedin_at)
-                    <p class="uk-text-large">交歓会テーブル: {{ $participant->reception_table }}</p>
-                    <img src="{{ url('/images/passed_reception.png') }}" width="" height=""><br>
-                @elseif(env('RECEPTION_ACCEPT_TIME') > now() && $participant->checkedin_at)
-                    {{-- 全体会 --}}
-                    <img src="{{ url('/images/passed_ceremony.png') }}" width="" height=""><br>
-                    <span>この画面を受付スタッフに見せてご入場ください</span>
+                @if (
+                    (env('CEREMONY1_ACCEPT_START') < now() && env('CEREMONY1_ACCEPT_END') > now()) ||
+                        (env('CEREMONY2_ACCEPT_START') < now() && env('CEREMONY2_ACCEPT_END') > now()))
+                    @if (isset($participant->checkedin_at))
+                        <img src="{{ url('/images/passed_ceremony.png') }}" width="" height=""><br>
+                        <span>この画面を受付スタッフに見せてご入場ください</span>
+                    @endif
+                @elseif (env('RECEPTION_ACCEPT_START') < now() && env('RECEPTION_ACCEPT_END') > now())
+                    @if (isset($participant->reception_checkedin_at))
+                        <p class="uk-text-large">交歓会テーブル: {{ $participant->reception_table }}</p>
+                        <img src="{{ url('/images/passed_reception.png') }}" width="" height=""><br>
+                        <span>この画面を受付スタッフに見せてご入場ください</span>
+                    @endif
                 @endif
             </div>
         </div>

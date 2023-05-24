@@ -32,23 +32,37 @@ class MyPageController extends AppBaseController
             $participant = Participant::where('uuid', $request->id)->firstorfail();
         }
 
-        // 引率スカウトを引っ張る
-        if ($participant->category == "県連代表(4)") {
-            $participant->vs = Participant::where('pref', $participant->pref)->where('category', '県連代表(5)')->select('name', 'uuid', 'seat_number', 'self_absent', 'checkedin_at')->first();
-            $participant->bs = Participant::where('pref', $participant->pref)->where('category', '県連代表(6)')->select('name', 'uuid', 'seat_number', 'self_absent', 'checkedin_at')->first();
-        }
-
         return view('mypage.index')
             ->with('participant', $participant);
     }
+
     public function self_checkin(Request $request)
     {
         if (isset($request->uuid)) {
-            $participant = Participant::where('uuid', $request->uuid)->firstorfail();
-            if ($request->confirm) {
-                $participant->checkedin_at = now();
-                $participant->save();
+            $uuid = $request->uuid;
+
+            if ($request->confirm == 'true') {
+                // 全体会
+                if (
+                    now()->between(env('CEREMONY1_ACCEPT_START'), env('CEREMONY1_ACCEPT_END')) ||
+                    now()->between(env('CEREMONY2_ACCEPT_START'), env('CEREMONY2_ACCEPT_END'))
+                ) {
+                    $person = Participant::where('uuid', $uuid)->where('checkedin_at', null)->firstorfail();
+                    $person->checkedin_at = now();
+                    $person->checkin_type_ceremony = 'self';
+                    $person->save();
+                    Flash::success($person->name . "さんのチェックイン完了");
+                }
+                // 交歓会
+                if (now()->between(env('RECEPTION_ACCEPT_START'), env('RECEPTION_ACCEPT_END'))) {
+                    $person = Participant::where('uuid', $uuid)->where('reception_checkedin_at', null)->firstorfail();
+                    $person->reception_checkedin_at = now();
+                    $person->checkin_type_reception = 'self';
+                    $person->save();
+                    Flash::success($person->name . "さんのチェックイン完了");
+                }
             }
+            $participant = Participant::where('uuid', $request->uuid)->firstorfail();
             return view('mypage.self_checkin')->with('participant', $participant);
         } else {
             return back();
