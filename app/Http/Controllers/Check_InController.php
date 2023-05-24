@@ -33,14 +33,15 @@ class Check_InController extends AppBaseController
             $participant = Participant::where('uuid', $request->id)->firstorfail();
             // ここで時刻分岐
             if (
-                // 全体会
+                // 全体会チェックイン
+                // テストで実際の時刻を入れる時は env('')ではなく '2023-05-24 12:34:00'の形式で入れる事
                 now()->between(env('CEREMONY1_ACCEPT_START'), env('CEREMONY1_ACCEPT_END')) ||
                 now()->between(env('CEREMONY2_ACCEPT_START'), env('CEREMONY2_ACCEPT_END'))
             ) {
                 $participant->checkedin_at = now();
             }
             if (now()->between(env('RECEPTION_ACCEPT_START'), env('RECEPTION_ACCEPT_END'))) {
-                // 交歓会
+                // 交歓会チェックイン
                 $participant->reception_checkedin_at = now();
             }
 
