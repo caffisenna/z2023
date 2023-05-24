@@ -68,6 +68,10 @@
         <td>{{ $participant->memo }}</td>
     </tr>
     <tr>
+        <th>スタッフメモ</th>
+        <td>{{ $participant->staff_memo }}</td>
+    </tr>
+    <tr>
         <th>申込日</th>
         <td>{{ $participant->created_at }}</td>
     </tr>
