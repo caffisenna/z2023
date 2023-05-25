@@ -16,31 +16,49 @@
                     {!! Form::submit('検索', ['class' => 'uk-button uk-button-primary']) !!}
                     {{ Form::close() }}
                 </div>
+                @if (now()->between(env('CEREMONY1_ACCEPT_START'), env('CEREMONY1_ACCEPT_END')) ||
+                        now()->between(env('CEREMONY2_ACCEPT_START'), env('CEREMONY2_ACCEPT_END')))
+                    <h3>全体会チェックイン</h3>
+                @elseif(now()->between(env('RECEPTION_ACCEPT_START'), env('RECEPTION_ACCEPT_END')))
+                    <h3>交歓会チェックイン</h3>
+                @else
+                    <h3 class="uk-text-danger">チェックイン時間外!</h3>
+                @endif
+
                 @if (isset($participants))
                     <table class="uk-table uk-table-hover uk-table-striped uk-table-small">
                         <tr>
                             <th>氏名</th>
-                            <th>座席</th>
-                            <th>所属</th>
+                            <th>県連</th>
                             <th>チェックイン</th>
                         </tr>
                         @foreach ($participants as $participant)
                             <tr class="uk-text-small">
-                                <td>{{ $participant->name }}({{ $participant->furigana }})
-                                    <span class="uk-text-warning">
-                                        @if (isset($participant->vs))
-                                            <br>VS:{{ $participant->vs->name }}
-                                        @endif
-                                        @if (isset($participant->bs))
-                                            <br>BS:{{ $participant->bs->name }}
-                                        @endif
-                                    </span>
-                                </td>
-                                <td>{{ $participant->seat_number }}</td>
+                                <td>{{ $participant->name }}<br>({{ $participant->furigana }})</td>
                                 <td>{{ $participant->pref }}</td>
-                                <td><a href="{{ url('/s/check_in/input?uuid=') . $participant->uuid }}"
-                                        class="uk-button uk-button-primary uk-button-small"
-                                        onclick="return confirm('{{ $participant->name }}さんをチェックインしますか?')"><span uk-icon="sign-in"></span></a></td>
+                                <td>
+                                    @if (now()->between(env('CEREMONY1_ACCEPT_START'), env('CEREMONY1_ACCEPT_END')) ||
+                                            now()->between(env('CEREMONY2_ACCEPT_START'), env('CEREMONY2_ACCEPT_END')))
+                                        @if (isset($participant->checkedin_at))
+                                            済み
+                                        @else
+                                            <a href="{{ url('/s/check_in/input?uuid=') . $participant->uuid }}"
+                                                class="uk-button uk-button-primary uk-button-small"
+                                                onclick="return confirm('{{ $participant->name }}さんをチェックインしますか?')"><span
+                                                    uk-icon="sign-in"></span></a>
+                                        @endif
+                                    @endif
+                                    @if (now()->between(env('RECEPTION_ACCEPT_START'), env('RECEPTION_ACCEPT_END')))
+                                        @if (isset($participant->reception_checkedin_at))
+                                            済み
+                                        @else
+                                            <a href="{{ url('/s/check_in/input?uuid=') . $participant->uuid }}"
+                                                class="uk-button uk-button-primary uk-button-small"
+                                                onclick="return confirm('{{ $participant->name }}さんをチェックインしますか?')"><span
+                                                    uk-icon="sign-in"></span></a>
+                                        @endif
+                                    @endif
+                                </td>
                             </tr>
                         @endforeach
                     </table>
