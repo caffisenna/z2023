@@ -69,9 +69,9 @@
             @else
                 <p class="uk-text-center">【セルフチェックインが可能な時間】</p>
                 <ul class="uk-list uk-text-center uk-text-small">
-                    <li>全体会: 5月28日(土) 00:00〜17:00</li>
-                    <li>交歓会: 5月28日(土) 17:00〜20:00</li>
-                    <li>全体会: 5月29日(日) 00:00〜14:00</li>
+                    <li>全体会: 5月27日(土) 00:00〜17:00</li>
+                    <li>交歓会: 5月27日(土) 17:00〜20:00</li>
+                    <li>全体会: 5月28日(日) 00:00〜14:00</li>
                 </ul>
                 <p class="uk-text-small uk-text-warning uk-text-center">各時間帯でデジタルパスを再表示してください</p>
             @endif
