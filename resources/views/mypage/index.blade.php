@@ -76,11 +76,10 @@
                 <p class="uk-text-small uk-text-warning uk-text-center">各時間帯でデジタルパスを再表示してください</p>
             @endif
 
-            @if (
-                (now()->between(env('CEREMONY1_ACCEPT_START'), env('CEREMONY1_ACCEPT_END')) ||
+            @if (now()->between(env('CEREMONY1_ACCEPT_START'), env('CEREMONY1_ACCEPT_END')) ||
                     now()->between(env('CEREMONY2_ACCEPT_START'), env('CEREMONY2_ACCEPT_END')) ||
-                    now()->between(env('RECEPTION_ACCEPT_START'), env('RECEPTION_ACCEPT_END'))) &&
-                    $participant->reception == '参加する')
+                    (now()->between(env('RECEPTION_ACCEPT_START'), env('RECEPTION_ACCEPT_END')) &&
+                        $participant->reception == '参加する'))
                 <div class="uk-text-center uk-margin">
                     {!! Form::open(['route' => 'self_checkin', 'method' => 'POST']) !!}
                     {!! Form::hidden('uuid', $participant->uuid, null) !!}
